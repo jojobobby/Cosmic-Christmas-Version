@@ -6,5 +6,6 @@
   "blocking": 1,
   "restrictTp": false,
   "showDisplays": true,
+  "portals": [ 0x7b66 ],
   "maps": [ "CrownguardCastle.jm" ]
 }

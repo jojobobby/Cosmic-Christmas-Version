@@ -1709,62 +1709,6 @@ namespace wServer.realm.commands
         }
     }
 
-    internal class StorageUpgrade : Command
-    {
-        public StorageUpgrade() : base("aisydgaahbsdghasdausdaUFFVGYOHYUasdyasgdaOUTTJOUJIyisdysa") { }
-
-        protected override bool Process(Player player, RealmTime time, string args)
-        {
-            var acc = player.Client.Account;
-            if (String.IsNullOrWhiteSpace(args))
-            {
-                player.SendError("Usage: /upgrade <Lunar/Earth>");
-                player.SendHelp("Lunar upgrade costs 1000 fame, and gives one additional slot in potion storage for your celestial enhancer.");
-                player.SendHelp("Earth upgrade costs 500 fame, and gives 10 additional slots in potion storage for your potions.");
-                return false;
-            }
-            if (args.ToLower() == "lunar")
-            {
-                if (acc.Fame >= 1000)
-                {
-                    if (acc.PotionStorageLunarLevel < 25)
-                    {
-                        acc.Fame -= 1000;
-                        acc.PotionStorageLunarLevel++;
-                        player.ResolveStorageSize();
-                        acc.FlushAsync();
-                        player.SendInfo("Your storage has been upgraded, you can now store " + acc.PotionStorageLunarSize + " celestial enhancers");
-                        return true;
-                    }
-                    player.SendError("You can't upgrade this storage anymore");
-                    return false;
-                }
-                player.SendError("You don't have enought fame to buy this upgrade.");
-                return false;
-            }
-            else if (args.ToLower() == "earth")
-            {
-                if (acc.Fame >= 500)
-                {
-                    if (acc.PotionStorageLevel < 10)
-                    {
-                        acc.Fame -= 500;
-                        acc.PotionStorageLevel++;
-                        player.ResolveStorageSize();
-                        acc.FlushAsync();
-                        player.SendInfo("Your storage has been upgraded, you can now store " + acc.PotionStorageSize + " potions of each type.");
-                        return true;
-                    }
-                    player.SendError("You can't upgrade this storage anymore");
-                    return false;
-                }
-                player.SendError("You don't have enought fame to buy this upgrade.");
-                return false;
-            }
-            player.SendError("Unknown upgrade type...");
-            return false;
-        }
-    }
     internal class DisplayStorage : Command
     {
         public DisplayStorage() : base("storage") { }

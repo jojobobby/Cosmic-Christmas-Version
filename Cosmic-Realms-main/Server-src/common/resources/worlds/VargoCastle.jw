@@ -6,5 +6,6 @@
   "blocking": 1,
   "restrictTp": false,
   "showDisplays": true,
+  "portals": [ 0x7b68, 0x4a52],
   "maps": [ "VargoCastle.jm" ]
 }

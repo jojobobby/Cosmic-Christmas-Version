@@ -268,6 +268,9 @@ namespace wServer.logic
 
                     new ItemLoot("The Infinity Javelin", 0.0006, damagebased: true, threshold: 0.02),
 
+
+                    new ItemLoot("Sigil of the Body", 0.001, damagebased: true, numRequired: 1),
+
                     new ItemLoot("Cloak of Wild Shadows", 0.001, damagebased: true, threshold: 0.01),
                     new ItemLoot("Commander's Horn of War", 0.001, damagebased: true, threshold: 0.01),
                     new ItemLoot("Orb of Horrific Dark Magic", 0.001, damagebased: true, threshold: 0.01),
@@ -330,7 +333,8 @@ namespace wServer.logic
                     new ItemLoot("Earth Shard", 0.01),
                     new ItemLoot("Claws Of No Remorse", 0.001, damagebased: true),
                     new ItemLoot("Cloth of Assassination", 0.001, damagebased: true),
-                     new ItemLoot("Special Crate", 0.1),
+                    new ItemLoot("Sigil of the Void", 0.001, damagebased: true, numRequired: 1),
+                    new ItemLoot("Special Crate", 0.1),
 
                     new TierLoot(5, ItemType.Ring, 0.2),
                     new TierLoot(6, ItemType.Ring, 0.1),
@@ -414,6 +418,8 @@ namespace wServer.logic
                     new ItemLoot("Potion of Critical Chance", 0.02),
                     new ItemLoot("Potion of Critical Damage", 0.02),
                     new ItemLoot("Earth Shard", 0.01),
+
+                    new ItemLoot("Sigil of the Mind", 0.001, damagebased: true, numRequired: 1),
                     new ItemLoot("Defender's Majestic Robe", 0.006, damagebased: true),
                     new ItemLoot("Staff of the Everbind Magic", 0.001, damagebased: true, threshold: 0.01),
                     new ItemLoot("Robe of the Twin Brother", 0.001, damagebased: true, threshold: 0.01),//Defender's Majestic Robe
@@ -529,6 +535,8 @@ namespace wServer.logic
                     new ItemLoot("Heavy Guardian's Plate", 0.001, damagebased: true, threshold: 0.01),
                     new ItemLoot("Special Crate", 0.1, damagebased: true),
 
+
+                    new ItemLoot("Sigil of the Soul", 0.001, damagebased: true, numRequired: 1),
                     new ItemLoot("Greater Potion of Critical Chance", 0.02),
                     new ItemLoot("Greater Potion of Critical Damage", 0.02),
 
