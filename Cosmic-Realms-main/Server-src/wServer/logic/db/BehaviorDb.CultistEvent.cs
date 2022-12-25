@@ -873,11 +873,11 @@ namespace wServer.logic
                     new ItemLoot("Heavy Armor Schematic", 0.005, damagebased: true),
                     new ItemLoot("Special Crate", 0.35),
                     new ItemLoot("Miscellaneous Crate", 0.15),
-                    new ItemLoot("Rave's Sacrificial Staff", 0.0006, damagebased: true, threshold: 0.02),
+                    new ItemLoot("Rave's Sacrificial Staff", 0.002, damagebased: true, threshold: 0.02),
                     new ItemLoot("Bloody Ritual robe", 0.001, damagebased: true, threshold: 0.01),
                     new ItemLoot("Skull of the Demonic Bearer", 0.001, damagebased: true, threshold: 0.01),
                     new ItemLoot("Blood Essence Ring", 0.001, damagebased: true, threshold: 0.01),
-                    new ItemLoot("Pumpkin Plant Bow", 0.0006, damagebased: true, threshold: 0.02),
+                    new ItemLoot("Pumpkin Plant Bow", 0.002, damagebased: true, threshold: 0.02),
                     new ItemLoot("Seal of a Evil Spirit", 0.006, damagebased: true)
                 )
             )

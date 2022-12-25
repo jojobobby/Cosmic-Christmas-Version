@@ -191,7 +191,7 @@ namespace wServer.logic
                     new ItemLoot("Robe Schematic", 0.005, damagebased: true),
                     new ItemLoot("Heavy Armor Schematic", 0.005, damagebased: true),
                     new ItemLoot("Potion of Critical Damage", 0.04),
-                    new ItemLoot("Marble Seal", 0.0006, damagebased: true, threshold: 0.01),
+                    new ItemLoot("Marble Seal", 0.002, damagebased: true, threshold: 0.01),
                     new ItemLoot("The Ancient instrument", 0.001, damagebased: true, threshold: 0.01),
                     new ItemLoot("Magical Lodestone", 0.004, damagebased: true, threshold: 0.01),
                     new ItemLoot("Sword of the Colossus", 0.001, damagebased: true, threshold: 0.01),
@@ -1425,8 +1425,8 @@ namespace wServer.logic
                     new ItemLoot("Armor of Nil", 0.001, damagebased: true, threshold: 0.01),
                     new ItemLoot("Voided Quiver", 0.001, damagebased: true, threshold: 0.01),
                     new ItemLoot("Bow of the Void", 0.001, damagebased: true, threshold: 0.01),
-                    new ItemLoot("Omnipotence Ring", 0.0006, damagebased: true, threshold: 0.02),
-                    new ItemLoot("Disarray", 0.0006, damagebased: true, threshold: 0.02),
+                    new ItemLoot("Omnipotence Ring", 0.002, damagebased: true, threshold: 0.02),
+                    new ItemLoot("Disarray", 0.002, damagebased: true, threshold: 0.02),
                     new TierLoot(2, ItemType.Potion)
                 )
                 )

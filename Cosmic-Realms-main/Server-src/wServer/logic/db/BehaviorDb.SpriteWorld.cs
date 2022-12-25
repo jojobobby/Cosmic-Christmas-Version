@@ -167,8 +167,8 @@ namespace wServer.logic
                     new DropPortalOnDeath(target: "Epic Sprite World Portal", probability: 1)
                 ),
                 new Threshold(0.0001,
-                    new ItemLoot(item: "Dagger of the Endless Magic", probability: 0.0006, damagebased: true),
-                    new ItemLoot(item: "Wand of Mythical Fusion", probability: 0.0006, damagebased: true),
+                    new ItemLoot(item: "Dagger of the Endless Magic", probability: 0.002, damagebased: true),
+                    new ItemLoot(item: "Wand of Mythical Fusion", probability: 0.002, damagebased: true),
 
                     new TierLoot(tier: 6, type: ItemType.Armor, probability: 0.4),
                     new TierLoot(tier: 7, type: ItemType.Armor, probability: 0.4),

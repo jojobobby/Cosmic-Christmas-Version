@@ -141,7 +141,7 @@ namespace wServer.logic
                     new ItemLoot("Light Armor Schematic", 0.02, damagebased: true),
                     new ItemLoot("Robe Schematic", 0.02, damagebased: true),
                     new ItemLoot("Heavy Armor Schematic", 0.02, damagebased: true),
-                    new ItemLoot("Magic Cards", 0.0006, damagebased: true, threshold: 0.01),
+                    new ItemLoot("Magic Cards", 0.002, damagebased: true, threshold: 0.01),
                     new ItemLoot("The Forgotten Crown", 0.001, damagebased: true, threshold: 0.01),
                     new ItemLoot("Timeworn Scepter", 0.001, damagebased: true, threshold: 0.01),
                     new ItemLoot("Mark of the Forgotten King", 1)//Timeworn Scepter
@@ -1279,7 +1279,7 @@ namespace wServer.logic
                         new ItemLoot("Light Armor Schematic", 0.02, damagebased: true),
                         new ItemLoot("Robe Schematic", 0.02, damagebased: true),
                         new ItemLoot("Heavy Armor Schematic", 0.02, damagebased: true),
-                        new ItemLoot("Magic Cards", 0.0006, damagebased: true, threshold: 0.01),
+                        new ItemLoot("Magic Cards", 0.002, damagebased: true, threshold: 0.01),
                         new ItemLoot("The Forgotten Crown", 0.001, damagebased: true, threshold: 0.01),
                         new ItemLoot("Timeworn Scepter", 0.001, damagebased: true, threshold: 0.01),
                         new ItemLoot("Mark of the Forgotten King", 1)//Timeworn Scepter

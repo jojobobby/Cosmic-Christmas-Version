@@ -266,7 +266,7 @@ namespace wServer.logic
 
                     new ItemLoot("KnightST5", 0.006, damagebased: true),//The Infinity Javelin
 
-                    new ItemLoot("The Infinity Javelin", 0.0006, damagebased: true, threshold: 0.02),
+                    new ItemLoot("The Infinity Javelin", 0.002, damagebased: true, threshold: 0.02),
 
 
                     new ItemLoot("Sigil of the Body", 0.001, damagebased: true, numRequired: 1),

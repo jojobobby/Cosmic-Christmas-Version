@@ -54,7 +54,7 @@ namespace wServer.logic
                     new ItemLoot("Potion of Mana", 0.3),
                     new ItemLoot("Potion of Life", 0.3),
                     new ItemLoot("Quest Chest Item", 0.05),
-                    new ItemLoot("Enforcer", 0.0006),
+                    new ItemLoot("Enforcer", 0.002),
                     new TierLoot(tier: 13, type: ItemType.Armor, probability: 0.03125),
                     new TierLoot(tier: 12, type: ItemType.Armor, probability: 0.0625),
                     new TierLoot(tier: 12, type: ItemType.Weapon, probability: 0.03125),

@@ -60,7 +60,7 @@ namespace wServer.logic
                     new ItemLoot("Fragment of the Earth", 0.01),
                     new ItemLoot("Dirk of Cronus", 0.001, damagebased: true, threshold: 0.01),
                     new ItemLoot("Royal Glutinous Hide", .01, damagebased: true),
-                    new ItemLoot("Necklace of Magic", 0.0006, damagebased: true, threshold: 0.02)
+                    new ItemLoot("Necklace of Magic", 0.002, damagebased: true, threshold: 0.02)
                 )
             )
             .Init("Cube Overseer",
