@@ -72,7 +72,7 @@ public class WebMain extends Sprite {
     public static var ENV:String;
     public static var STAGE:Stage;
     public static var USER_AGENT:String = "None";
-    public static var serverIP:String = "127.0.0.1";//"13.82.231.124";
+    public static var serverIP:String = "74.91.113.162";//"13.82.231.124";
     public static var sWidth:Number = 800;
     public static var sHeight:Number = 600;
     protected var context:IContext;
@@ -152,7 +152,7 @@ public class WebMain extends Sprite {
     {
         serverIP = stage.loaderInfo.parameters["Host"];
         if (serverIP == null)
-            serverIP = "127.0.0.1"; //13.82.231.124
+            serverIP = "74.91.113.162"; //13.82.231.124
     }
 
     private function hackParameters():void {

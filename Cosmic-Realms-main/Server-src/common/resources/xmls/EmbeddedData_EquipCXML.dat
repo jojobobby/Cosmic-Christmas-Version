@@ -383,11 +383,11 @@
 		<Description>The seal used to stop players that are suspicious. Make sure to ./Hide before u use this item or it may affect you too.</Description>
 		<Sound>spell/fire_spray</Sound>
 		<ActivateOnEquip stat ="0" amount="10000">IncrementStat</ActivateOnEquip>
-		<ActivateOnEquip stat="26" amount="1000">IncrementStat</ActivateOnEquip>
+		<ActivateOnEquip stat="26" amount="1000">IncrementStat</ActivateOnEquip>w
 		<ActivateOnEquip stat="22" amount="30">IncrementStat</ActivateOnEquip>
 		<Activate effect="Invulnerable" duration="25" range="3" color="0xff0080" target="player" center="player" visualEffect="0" useWisMod="false">GenericActivate</Activate>
 		<Activate effect="Paralyzed" duration="25" range="3" color="0xff0080" target="player" center="player" visualEffect="0" useWisMod="false">GenericActivate</Activate>
-		<Activate effect="Quiet" duration="25" range="3" color="0xff0080" target="player" center="player" visualEffect="0" useWisMod="false">GenericActivate</Activate>
+		<Activate effect="Quiet" duration="25" range="3" color="0xff0080" target="player" center="player" visualEffect="0" useWisMod="false">GenericActivate</Activate>w
 		<Usable/>
 		<BagType>10</BagType>
 		<FameBonus>50</FameBonus>

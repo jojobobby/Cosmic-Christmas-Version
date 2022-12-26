@@ -13,7 +13,7 @@ namespace wServer.logic.behaviors
         private readonly int? _timeout;
         private readonly Vector2 _offset;
 
-        public DropPortalOnDeath(string target, double probability = 1, int? timeout = null, Vector2 Offset = new Vector2())
+        public DropPortalOnDeath(string target, double probability = 1, int? timeout = 60, Vector2 Offset = new Vector2())
         {
             _target = GetObjType(target);
             _probability = (float)probability;

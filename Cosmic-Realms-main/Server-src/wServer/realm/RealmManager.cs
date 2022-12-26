@@ -161,6 +161,25 @@ namespace wServer.realm
             AddRecipe("Legendary Sor Crystal", "Legendary Sor Converter", "Sor Crystal");//
 
             AddRecipe("Predator Necklace", "Hunter Necklace", "Legendary Sor Crystal", "Fragment of the Earth");//
+
+            AddRecipe("Drannol's Judgement", "Predator Necklace", "Legendary Sor Crystal");//
+            AddRecipe("Fractal Nova", "Drannol's Judgement", "Legendary Sor Crystal");//
+            AddRecipe("Jackpot", "Fractal Nova", "Legendary Sor Crystal");//
+            AddRecipe("Meteor", "Jackpot", "Legendary Sor Crystal");//
+            AddRecipe("Man O War", "Meteor", "Legendary Sor Crystal");//
+            AddRecipe("Dreamweaver of Darogek", "Man O War", "Legendary Sor Crystal");//
+            AddRecipe("Thunder and Lightning", "Dreamweaver of Darogek", "Legendary Sor Crystal");//
+            AddRecipe("Faith of the Angel", "Thunder and Lightning", "Legendary Sor Crystal");//
+            AddRecipe("Never Before Seen", "Faith of the Angel", "Legendary Sor Crystal");//
+            AddRecipe("Gargoyle Crusher", "Never Before Seen", "Legendary Sor Crystal");//
+            AddRecipe("Gargoyle Stoneplate", "Gargoyle Crusher", "Legendary Sor Crystal");//
+            AddRecipe("The Infernus", "Gargoyle Stoneplate", "Legendary Sor Crystal");//
+            AddRecipe("March of the Army", "The Infernus", "Legendary Sor Crystal");//
+            AddRecipe("Vardon's Resilience", "March of the Army", "Legendary Sor Crystal");//
+            AddRecipe("Vardon's Resilience", "March of the Army", "Legendary Sor Crystal");//
+
+
+
             AddRecipe("Lunar Ascension", "Fragment of the Moon", "Fragment of the Earth", "Cyberious Infused Shard");//
 
 
@@ -242,7 +261,7 @@ namespace wServer.realm
             AddRecipe("Frozen Staff of Esben", "Frozen Ice Shard", "Staff of Esben");//
             AddRecipe("Frozen Crystal Wand", "Frozen Ice Shard", "Crystal Wand");// "Golden Ankh"
 
-            AddRecipe("Exalted Stone Sword",  "Spell Scroll", "Jade", "Cyberious's Plate", "Ancient Stone Sword");
+            AddRecipe("Exalted Stone Sword", "Spell Scroll", "Jade", "Cyberious's Plate", "Ancient Stone Sword");
 
             AddRecipe("Snake Skin Bulwark", "Wand of the Bulwark", "Shard of Fire", "Power Battery", "Red Ichor");
             AddRecipe("Fortification", "Topaz", "Jade", "Amethyst", "Snake Skin Bulwark", "Cyberious Infused Shard", "Glowing Void Matter");
@@ -341,7 +360,7 @@ namespace wServer.realm
             AddRecipe("Oryx's Mystery Chest", "Light Armor Schematic", "Robe Schematic", "Heavy Armor Schematic", "Scraps of the Descendant", "Scraps of the Descendant");
             AddRecipe("Executioner's Blade", "Lunar Descension");
             AddRecipe("Lunar Descension", "Executioner's Blade");
-            
+
             AddRecipe("Dragon Soul's Katana", "Ray Katana", "Ray Katana", "Cyberious Infused Shard", "Ectoplasm", "Glowing Void Matter", "Fragments of Void Matter");
 
 
