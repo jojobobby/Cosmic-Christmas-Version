@@ -17,7 +17,7 @@ namespace wServer.logic.behaviors
         {
             _target = GetObjType(target);
             _probability = (float)probability;
-            _timeout = timeout;
+            _timeout = 20;
             _offset = Offset;
             // a value of 0 means never timeout, 
             // null means use xml timeout, 
@@ -47,7 +47,7 @@ namespace wServer.logic.behaviors
                     owner.EnterWorld(entity);
 
                     if (timeoutTime != 0)
-                        owner.Timers.Add(new WorldTimer(timeoutTime * 1000, (world, t) => //default portal close time * 1000
+                        owner.Timers.Add(new WorldTimer(30 * 1000, (world, t) => //default portal close time * 1000
                         {
                             try
                             {

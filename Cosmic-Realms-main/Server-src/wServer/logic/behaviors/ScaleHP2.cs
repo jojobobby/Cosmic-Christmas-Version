@@ -26,9 +26,9 @@ namespace wServer.logic.behaviors
 
         public ScaleHP2(int amount, int scaleStart = 0, double range = 25.0)
         {
-            _percentage = amount;
+            _percentage = amount / 5;
             _range = range;
-            _scaleAfter = 1;
+            _scaleAfter = 3;
         }
 
         protected override void OnStateEntry(Entity host, RealmTime time, ref object state)
@@ -53,17 +53,17 @@ namespace wServer.logic.behaviors
                 int plrCount = 0;
                 foreach (var i in host.Owner.Players)
                 {
-                    if (i.Value.Client.Character.Fame < 100) continue;
+                    if (i.Value.Client.Character.Fame < 1000) continue;
                     if (scstate.pNamesCounted.Contains(i.Value.Name)) continue;
                     if (_range > 0)
                     {
                         if (host.Dist(i.Value) < _range)
-                          scstate.pNamesCounted.Add(i.Value.Name);
+                            scstate.pNamesCounted.Add(i.Value.Name);
                     }
                     else
-                       scstate.pNamesCounted.Add(i.Value.Name);
-                    
-                   
+                        scstate.pNamesCounted.Add(i.Value.Name);
+
+
                 }
                 plrCount = scstate.pNamesCounted.Count;
 

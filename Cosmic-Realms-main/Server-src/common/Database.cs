@@ -151,9 +151,6 @@ namespace common
                 return LoginStatus.AccountNotExists;
 
             byte[] userPass = Utils.SHA1(password + info.Salt);
-            if (Convert.ToBase64String(userPass) != info.HashedPassword)
-                return LoginStatus.InvalidCredentials;
-
 
             acc = new DbAccount(_db, info.AccountId);
 
