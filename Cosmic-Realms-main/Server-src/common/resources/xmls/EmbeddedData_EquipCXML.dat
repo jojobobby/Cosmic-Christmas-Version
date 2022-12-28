@@ -1621,10 +1621,6 @@
 			<Wavy/>
 			<MultiHit/>
 		</Projectile>
-		<ActivateOnEquip stat="27" amount="10">IncrementStat</ActivateOnEquip>
-		<ActivateOnEquip stat="22" amount="10">IncrementStat</ActivateOnEquip>
-		<ActivateOnEquip stat="122" amount="20">IncrementStat</ActivateOnEquip>
-		<ActivateOnEquip stat="102" amount="10">IncrementStat</ActivateOnEquip>
 		<Steal type="life" amount="3"/>
 		<BagType>10</BagType>
 		<ST/>
@@ -1632,7 +1628,6 @@
 		<NumProjectiles>1</NumProjectiles>
 		<OldSound>magicShoot</OldSound>
 	</Object>
-
 
 	<Object type="0x7b23" id="Ornias Arrow">
 		<Class>Projectile</Class>
@@ -4212,6 +4207,8 @@
 		<Sound>use_potion</Sound>
 		<Quantity>30</Quantity>
 		<Soulbound/>
+		<Consumable/>
+		<Activate>Omnipotent</Activate>
 		<BagType>3</BagType>
 		<feedPower>150</feedPower>
 		<DisplayId>Omnipotent Token</DisplayId>
@@ -25813,8 +25810,8 @@
 			<ObjectId>Pirate King Gold</ObjectId>
 			<Speed>90</Speed>
 			<LifetimeMS>472</LifetimeMS>
-			<MinDamage>350</MinDamage>
-			<MaxDamage>339</MaxDamage>
+			<MinDamage>0</MinDamage>
+			<MaxDamage>0</MaxDamage>
 			<Size>100</Size>
 			<Wavy/>
 		</Projectile>
@@ -29961,8 +29958,8 @@
 		<Projectile>
 			<ObjectId>Horrific Proj</ObjectId>
 			<Speed>110</Speed>
-			<MinDamage>315</MinDamage>
-			<MaxDamage>295</MaxDamage>
+			<MinDamage>0</MinDamage>
+			<MaxDamage>0</MaxDamage>
 			<MultiHit/>
 			<ArmorPiercing/>
 			<LifetimeMS>818</LifetimeMS>

@@ -13,14 +13,15 @@ namespace wServer.logic
         private _ Oryx = () => Behav()
             .Init("Cyberious, The Commander of the Realm",
                 new State(
+                    new TransformOnDeath("Grand Champion Chest", 1, 1, 1),
                     new DropPortalOnDeath("Glowing Realm Portal", 100),
-                   new ScaleHP2(70, 4 ,15),
+                   new ScaleHP2(70, 4, 15),
                      new State("Beginning221",
                           new ConditionalEffect(ConditionEffectIndex.Invincible),
                          new PlayerWithinTransition(8, "Beginning")
                          ),
                       new State("Beginning",
-                     new ChangeMusic("https://github.com/GhostRealm/GhostRealm.github.io/raw/master/music/Cyberious.mp3"), 
+                     new ChangeMusic("https://github.com/GhostRealm/GhostRealm.github.io/raw/master/music/Cyberious.mp3"),
                      new Flash(0xf389E13, 1, 2),
                      new Taunt("You realmers... Isn't that what you call yourself?"),
                      new ConditionalEffect(ConditionEffectIndex.Invulnerable),
@@ -79,9 +80,9 @@ namespace wServer.logic
                     new State("Attack4",
                         new ConditionalEffect(ConditionEffectIndex.Invincible, false, 6500),
                         new ConditionalEffect(ConditionEffectIndex.Solid),
-                        new Shoot(25, projectileIndex: 12, count:3, fixedAngle: 220, rotateAngle: 3, coolDown: 200),
-                        new Shoot(25, projectileIndex: 12, count:3, fixedAngle: 230, rotateAngle: 3, coolDown: 200),//circle
-                        new Shoot(25, projectileIndex: 12, count:3, fixedAngle: 240, rotateAngle: 3, coolDown: 200),
+                        new Shoot(25, projectileIndex: 12, count: 3, fixedAngle: 220, rotateAngle: 3, coolDown: 200),
+                        new Shoot(25, projectileIndex: 12, count: 3, fixedAngle: 230, rotateAngle: 3, coolDown: 200),//circle
+                        new Shoot(25, projectileIndex: 12, count: 3, fixedAngle: 240, rotateAngle: 3, coolDown: 200),
 
                         new Shoot(10, 6, projectileIndex: 11, predictive: 1, coolDown: 2000),
                         new Shoot(10, 6, projectileIndex: 11, predictive: 1, coolDownOffset: 250, coolDown: 2000),
@@ -125,7 +126,7 @@ namespace wServer.logic
                         new TimedTransition(2500, "Attack8")
                     ),
                     new State("Attack8",
-                         
+
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable, false, 5000),
                     new Taunt("Vanish."),
                     new ConditionalEffect(ConditionEffectIndex.Solid),
@@ -143,8 +144,8 @@ namespace wServer.logic
                     new Grenade(2.5, 0, range: 8, coolDown: 1500, effect: ConditionEffectIndex.Diminished, effectDuration: 1500, color: 0xff0000, fixedAngle: 315),
                     new Grenade(2.5, 0, range: 4, coolDown: 1000, effect: ConditionEffectIndex.Sluggish, effectDuration: 1500, color: 0x000000, fixedAngle: 315),
 
-                    new Shoot(15, count: 6, rotateAngle: 5, fixedAngle:5, projectileIndex: 11, coolDown: 100),
-                    new Shoot(15, count: 1, rotateAngle: -5, fixedAngle:10, projectileIndex: 9, coolDown: 400),
+                    new Shoot(15, count: 6, rotateAngle: 5, fixedAngle: 5, projectileIndex: 11, coolDown: 100),
+                    new Shoot(15, count: 1, rotateAngle: -5, fixedAngle: 10, projectileIndex: 9, coolDown: 400),
 
                     /*
                     new Shoot(15, count: 6, fixedAngle: 0, projectileIndex: 10, coolDown: 3000),
@@ -226,7 +227,7 @@ namespace wServer.logic
                        new State("Failure2",
                         new Flash(0xffffff, 999, 2),
                         new Taunt("You... won... This planet has gotten too strong!, oryx shall know of this soon.")
-                                     
+
 
                     )
                 ),
@@ -278,7 +279,7 @@ namespace wServer.logic
                     new ItemLoot("Scraps of the Descendant", 0.0045, damagebased: true, threshold: 0.01),
                     new ItemLoot("Scraps of the Descendant", 0.0045, damagebased: true, threshold: 0.01),
                     new ItemLoot("Cyberious Infused Shard", 0.0045, damagebased: true, threshold: 0.01),
-                   
+
                     new TierLoot(7, ItemType.Ring, 0.010),
                     new TierLoot(6, ItemType.Ring, 0.020),
                     new TierLoot(10, ItemType.Weapon, 0.30),
@@ -298,10 +299,10 @@ namespace wServer.logic
                      .Init("Fate, The Lowend Guardian",
             new State(
                 new ScaleHP2(60, 2, 15),
-                new StayCloseToSpawn(.2,6),
+                new StayCloseToSpawn(.2, 6),
                 new State("1",
                     new Taunt("Remove yourself from this castle at once!"),
-                    new ScaleHP2(25,2,25),
+                    new ScaleHP2(25, 2, 25),
                     new Wander(0.6),
                     new Shoot(10, projectileIndex: 0, count: 8, shootAngle: 10, coolDown: 1500),
                     new HpLessTransition(0.5, "2")
@@ -317,7 +318,7 @@ namespace wServer.logic
                     new Wander(0.6),
                     new Shoot(10, projectileIndex: 1, count: 3, shootAngle: 5, coolDown: 500)
             )
-                     
+
                 ),
                 new Threshold(0.0001,
                     new ItemLoot("Greater Potion of Attack", 0.2),
@@ -352,10 +353,10 @@ namespace wServer.logic
                     new TierLoot(12, ItemType.Armor, 0.2),
                     new TierLoot(13, ItemType.Armor, 0.15)
 
-                    
+
                      )
-            
-            
+
+
            )
          .Init("Abderus, The Mage",
             new State(
@@ -447,9 +448,9 @@ namespace wServer.logic
                 new State("1",
                     new ConditionalEffect(ConditionEffectIndex.ArmorBroken),
                     new Orbit(0.2, 4, 20, "Abderus, The Mage", speedVariance: 0.2),
-                    new Shoot(10, count: 2, projectileIndex: 0, shootAngle: 30 , coolDown: 2250)
+                    new Shoot(10, count: 2, projectileIndex: 0, shootAngle: 30, coolDown: 2250)
                     )
-                   
+
 
                 )
             )
@@ -486,7 +487,7 @@ namespace wServer.logic
                     new Shoot(10, count: 20, shootAngle: 18, coolDown: 2000, projectileIndex: 0, coolDownOffset: 220),
                     new Shoot(10, count: 20, shootAngle: 18, coolDown: 2000, projectileIndex: 0, coolDownOffset: 420),
                     new Shoot(10, count: 20, shootAngle: 18, coolDown: 2000, projectileIndex: 0, coolDownOffset: 620),
-                    new TimedTransition(8000,"rage2"),
+                    new TimedTransition(8000, "rage2"),
                     new HpLessTransition(0.65, "halfhprage")
                       ),
                 new State("rage2",
@@ -564,7 +565,7 @@ namespace wServer.logic
                 new State("1",
                     new Charge(speed: 0.6),
                     new Wander(1),
-                    new StayBack(0.1,1),
+                    new StayBack(0.1, 1),
                     new Shoot(10, count: 3, projectileIndex: 0, coolDown: 1500)
                     )
                 )
@@ -575,7 +576,7 @@ namespace wServer.logic
                     new TransformOnDeath("Cyberious TP 1", 1, 1, 100),
                     new ConditionalEffect(ConditionEffectIndex.Invincible),
                     new State("null",
-                        new EntityNotExistsTransition("Fate, The Lowend Guardian",99,"1")
+                        new EntityNotExistsTransition("Fate, The Lowend Guardian", 99, "1")
                         ),
                     new State("1",
                         new Taunt("[Teleporter Active]"),
@@ -598,7 +599,7 @@ namespace wServer.logic
             )
           .Init("Cyberious TP 3",
                 new State(
-                    new TransformOnDeath("Cyberious TP 3", 1 , 1 , 100),
+                    new TransformOnDeath("Cyberious TP 3", 1, 1, 100),
                     new ConditionalEffect(ConditionEffectIndex.Invincible),
                         new State("null",
                         new EntityNotExistsTransition("Abracax, The Forgotten", 99, "1")
@@ -609,7 +610,7 @@ namespace wServer.logic
                 )
             )
             )
-            
+
 
 
             ;

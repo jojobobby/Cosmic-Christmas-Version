@@ -4,6 +4,8 @@
   "difficulty": -1,
   "background": 0,
   "blocking": 1,
+  "isLimbo": false,
+  "persist": false,
   "restrictTp": false,
   "showDisplays": true,
   "portals": [ 0x7b69 ],

@@ -39,6 +39,8 @@ public class TextureRedrawer {
     private static const debug:Boolean = false;
 
     public static function redraw(tex:BitmapData, size:int, padBottom:Boolean, glowColor:uint, useCache:Boolean = true, sMult:Number = 5, oSize:Number = 1.4):BitmapData {
+        OUTLINE_FILTER.quality = Parameters.data_.bitmapQuality;
+
         var hash:int = getHash(size, padBottom, glowColor, sMult);
         if (useCache && isCached(tex, hash)) {
             return redrawCaches[tex][hash];

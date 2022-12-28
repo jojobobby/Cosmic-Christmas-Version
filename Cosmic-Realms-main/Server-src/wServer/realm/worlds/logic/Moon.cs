@@ -180,9 +180,6 @@ namespace wServer.realm.worlds.logic
                     ensurePopulation();
                 if (secs % 120 == 0) //every three minutes
                     checkEvents();
-                if (secs % 3000 == 0) //50mins
-                    CloseRealm();
-
             }
 
             _prevSec = secs;
@@ -192,7 +189,6 @@ namespace wServer.realm.worlds.logic
             if (_overseer == null)
                 return false;
 
-            _overseer.InitCloseRealm();
             return true;
         }
 
@@ -202,7 +198,7 @@ namespace wServer.realm.worlds.logic
             {
                 _activeEvents--;
 
-                _parent.Manager.Chat.Announce($"{enemy.ObjectDesc.ObjectId} has been killed by { ( (killer != null) ? killer.Name : string.Empty )}!");
+                _parent.Manager.Chat.Announce($"{enemy.ObjectDesc.ObjectId} has been killed by {((killer != null) ? killer.Name : string.Empty)}!");
             }
         }
 
@@ -242,7 +238,7 @@ namespace wServer.realm.worlds.logic
                 x = RandomUtil.RandInt(50, _worldWidth - 50);
                 y = RandomUtil.RandInt(50, _worldHeight - 50);
             } while (!_parent.IsPassable(x, y) ||
-            _parent.AnyPlayerNearby(x, y, 50) || 
+            _parent.AnyPlayerNearby(x, y, 50) ||
             _parent.Map[x, y].TileId == 0x8556
             );
 
@@ -294,7 +290,7 @@ namespace wServer.realm.worlds.logic
             {
                 var mobData = _regionMobs[(int)region - REGION_OFFSET].SpawnData;
 
-                foreach(var data in mobData)
+                foreach (var data in mobData)
                 {
                     var rand = RandomUtil.RandDouble();
 
@@ -306,7 +302,7 @@ namespace wServer.realm.worlds.logic
                 }
             } while (amount > ret);
 
-            foreach(var mob in toSpawn)
+            foreach (var mob in toSpawn)
             {
                 int x, y;
 
@@ -357,6 +353,6 @@ namespace wServer.realm.worlds.logic
         {
             _entityManager.onEnemyKilled(enemy, player);
         }
-        
+
     }
 }

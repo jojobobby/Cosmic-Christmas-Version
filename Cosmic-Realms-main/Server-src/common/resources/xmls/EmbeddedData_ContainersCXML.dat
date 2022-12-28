@@ -326,7 +326,7 @@
       <File>lofiObjb</File>
       <Index>0x09</Index>
     </Texture>
-    <Size>100</Size>
+	  <Size>10</Size>
     <SlotTypes>0, 0, 0, 0, 0, 0, 0, 0</SlotTypes>
   </Object>
   <Object type="0x6020" id="Loot Bag ST">
@@ -340,7 +340,7 @@
       <File>lofiObjb</File>
       <Index>0x0a</Index>
     </Texture>
-    <Size>100</Size>
+	  <Size>10</Size>
     <SlotTypes>0, 0, 0, 0, 0, 0, 0, 0</SlotTypes>
   </Object>
   <Object type="0x4339" id="Boosted Loot Bag LG">
@@ -354,7 +354,7 @@
       <File>lofiObjb</File>
       <Index>0x19</Index>
     </Texture>
-    <Size>100</Size>
+	  <Size>10</Size>
     <SlotTypes>0, 0, 0, 0, 0, 0, 0, 0</SlotTypes>
   </Object>
   <Object type="0x4340" id="Boosted Loot Bag ST">
@@ -368,7 +368,7 @@
       <File>lofiObjb</File>
       <Index>0x1a</Index>
     </Texture>
-    <Size>100</Size>
+    <Size>10</Size>
     <SlotTypes>0, 0, 0, 0, 0, 0, 0, 0</SlotTypes>
   </Object>
    <Object type="0x0510" id="Loot Bag Boost">
@@ -382,7 +382,7 @@
          <File>lofiObj4</File>
          <Index>0x95</Index>
       </Texture>
-     <Size>100</Size>
+	   <Size>10</Size>
       <SlotTypes>0, 0, 0, 0, 0, 0, 0, 0</SlotTypes>
    </Object>
   <Object type="0x3118" id="Loot Bag Forge">

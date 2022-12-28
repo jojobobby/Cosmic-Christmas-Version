@@ -3,9 +3,11 @@
   "sbName": "Castle of Dark Magic",
   "difficulty": -1,
   "background": 0,
+  "isLimbo": false,
+  "persist": false,
   "blocking": 1,
   "restrictTp": false,
   "showDisplays": true,
-  "portals": [ 0x7b68, 0x4a52],
+  "portals": [ 0x7b68, 0x4a52 ],
   "maps": [ "VargoCastle.jm" ]
 }

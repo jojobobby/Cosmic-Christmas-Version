@@ -51,9 +51,9 @@ namespace wServer.realm
 
         public int GetAttackDamage(int min, int max, bool isAbility = false)
         {
-           var ret = Owner.Client.Random.NextIntRange((uint)min, (uint)max) * GetAttackMult(isAbility) * CriticalModifier();
-           //Log.Info($"Dmg: {ret}");
-           return (int)ret;
+            var ret = Owner.Client.Random.NextIntRange((uint)min, (uint)max) * GetAttackMult(isAbility) * CriticalModifier();
+            //Log.Info($"Dmg: {ret}");
+            return (int)ret;
         }
 
         public float GetAttackMult(bool isAbility)
@@ -95,7 +95,7 @@ namespace wServer.realm
                 def *= (int)(Diminished);
             if (host.HasConditionEffect(ConditionEffects.ArmorBroken))
                 def = 0;
-          
+
             float limit = dmg * 0.25f;//0.15f;
 
             float ret;
@@ -104,7 +104,7 @@ namespace wServer.realm
 
             if (host.HasConditionEffect(ConditionEffects.Curse))
                 ret = (int)(ret * 1.20);
-          
+
             if (host.HasConditionEffect(ConditionEffects.Invulnerable) ||
                 host.HasConditionEffect(ConditionEffects.Invincible))
                 ret = 0;
@@ -129,7 +129,7 @@ namespace wServer.realm
 
             if (Owner.HasConditionEffect(ConditionEffects.ArmorBroken) || noDef)
                 def = 0;
-        
+
             float limit = dmg * 0.25f;//0.15f;
 
             float ret;
@@ -141,7 +141,7 @@ namespace wServer.realm
             if (Owner.HasConditionEffect(ConditionEffects.Curse))
                 ret = (int)(ret * 1.20);
             if (Owner.HasConditionEffect(ConditionEffects.Invulnerable) ||
-                Owner.HasConditionEffect(ConditionEffects.Invincible) || 
+                Owner.HasConditionEffect(ConditionEffects.Invincible) ||
                 Owner.HasConditionEffect(ConditionEffects.NoDamage))//NoDamage
                 ret = 0;
             return ret;
@@ -166,16 +166,19 @@ namespace wServer.realm
             if (Owner.HasConditionEffect(ConditionEffects.Tired))
                 baseFreq = baseFreq * 0.85f;
 
-            return  (1 / baseFreq) * (1 / Owner.Inventory[0].RateOfFire);
-        } 
+            return (1 / baseFreq) * (1 / Owner.Inventory[0].RateOfFire);
+        }
 
         public float CriticalModifier()
         {
             var returnamount = 0;
             var rand2Chance = Owner.Stats[7]; //Wisdomi
-            if (rand2Chance >= 30 && Owner.Inventory[1].ObjectType.ToString() == "0x7a47") //Wis above30 | scale
+            if (Owner.Inventory[1] is not null)
             {
-                returnamount = (Owner.Stats[7] / 100);
+                if (rand2Chance >= 30 && Owner.Inventory[1].ObjectType.ToString() == "0x7a47") //Wis above30 | scale
+                {
+                    returnamount = (Owner.Stats[7] / 100);
+                }
             }
 
             var randChance = Owner.Client.Random.NextIntRange(0, 200); //Raw crit chance
@@ -195,7 +198,7 @@ namespace wServer.realm
             }
 
             return ret;
-            
+
         }
 
 

@@ -12,7 +12,7 @@ namespace wServer.logic
           .Init("Raid Portal Spawner",
                 new State(
                     new ConditionalEffect(ConditionEffectIndex.Invincible, true),
-                    new DropPortalOnDeath("Castle of Cyberious Portal", 100),
+                    new DropPortalOnDeath("Castle of the Crownguard Portal", 100),
                     new State("Suicide",
                         new Suicide()
                         )
@@ -275,7 +275,7 @@ namespace wServer.logic
                 new State(
                      new ConditionalEffect(ConditionEffectIndex.Invincible, true),
                       new State("taunt",
-                       new PlayerWithinTransition(1,"start", true)
+                       new PlayerWithinTransition(1, "start", true)
                         ),
                       new State("start",
                       new HealPlayer(1, 99999, 75),

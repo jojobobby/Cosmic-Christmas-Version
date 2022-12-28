@@ -24,7 +24,10 @@ namespace wServer.networking.server
                 return _pool.Dequeue();
             }
         }
-
+        internal Client Peek()
+        {
+            return _pool.Peek();
+        }
         internal void Push(Client client)
         {
             if (client == null)

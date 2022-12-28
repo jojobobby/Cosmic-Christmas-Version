@@ -83,6 +83,9 @@ namespace wServer.realm.entities
                 var y = (int) (Y - 0.5);
                 var point = new IntPoint(x, y);
 
+                if (Owner == null)
+                    return false;
+
                 if (Owner.Map != null && Owner.Map.Contains(point) && ObjectDesc != null)
                     if (Owner.Map[x, y].ObjType == ObjectType)
                     {

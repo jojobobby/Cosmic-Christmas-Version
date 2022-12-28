@@ -8,6 +8,7 @@ import com.company.assembleegameclient.objects.particles.InspireEffect;
 import com.company.assembleegameclient.objects.particles.SpritesProjectEffect;
 
 import com.company.assembleegameclient.util.TimeUtil;
+import com.gskinner.motion.easing.Sine;
 
 import kabam.rotmg.marketUI.signals.MarketAddSignal;
 import kabam.rotmg.marketUI.signals.MarketBuySignal;
@@ -1560,7 +1561,34 @@ public class GameServerConnectionConcrete extends GameServerConnection {
                 return;
             case "beginnersPackage":
                 return;
+            case "LegendaryPopupUI":
+                var legendarySplashText:LegendarySplashText = new LegendarySplashText();
+                legendarySplashText.scaleX = .5;
+                legendarySplashText.scaleY = .5;
+                legendarySplashText.alpha = 1;
+                legendarySplashText.x = (600 - legendarySplashText.width) / 2;
+                legendarySplashText.y = 100;
 
+                this.gs_.addChild(legendarySplashText);
+
+                var t:GTween = new GTween(legendarySplashText, 2, {alpha:0}, {delay: 1, ease: Sine.easeIn, onComplete: function() :void {
+                        this.gs_.removeChild(legendarySplashText);
+                    }});
+                return;
+            case "MythicalPopupUI":
+                var mythicalSplashText:MythicalSplashText = new MythicalSplashText();
+                mythicalSplashText.scaleX = .5;
+                mythicalSplashText.scaleY = .5;
+                mythicalSplashText.alpha = 1;
+                mythicalSplashText.x = (600 - mythicalSplashText.width) / 2;
+                mythicalSplashText.y = 50;
+
+                this.gs_.addChild(mythicalSplashText);
+
+                var t2:GTween = new GTween(mythicalSplashText, 2, {alpha:0}, {delay: 1, ease: Sine.easeIn, onComplete: function() :void {
+                        this.gs_.removeChild(mythicalSplashText);
+                    }});
+                return;
 
         }
     }

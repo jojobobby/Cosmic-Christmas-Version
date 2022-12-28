@@ -316,7 +316,7 @@ namespace wServer.logic
                     new TierLoot(tier: 13, type: ItemType.Armor, probability: 0.055),
                     new TierLoot(tier: 6, type: ItemType.Ability, probability: 0.055),
                     new TierLoot(tier: 7, type: ItemType.Ability, probability: 0.025),
-                                 new ItemLoot(item: "Potion of Defense", probability: 0.2),
+                    new ItemLoot(item: "Potion of Defense", probability: 0.2),
                     new ItemLoot(item: "Potion of Attack", probability: 0.2),
                     new ItemLoot(item: "Potion of Vitality", probability: 0.2),
                     new ItemLoot(item: "Potion of Wisdom", probability: 0.2),
@@ -351,7 +351,7 @@ namespace wServer.logic
                     new ItemLoot("Robe of the Ancient Cultist", 0.004),
                     new ItemLoot("Skull of Corrupted Souls", 0.004),
                     new ItemLoot("Bloodshed Ring", 0.004),
-                      new ItemLoot(item: "Potion of Luck", probability: 1),
+                    new ItemLoot(item: "Potion of Luck", probability: 1),
                     new ItemLoot(item: "Greater Potion of Luck", probability: 0.1),
                     new ItemLoot("Staff of Unholy Sacrifice", 0.004)
 
@@ -361,10 +361,12 @@ namespace wServer.logic
 
            .Init("Grand Champion Chest",
                 new State(
-                    new ScaleHP2(100, 1, 15),
+                    new ConditionalEffect(ConditionEffectIndex.Invulnerable, false, 8000),
+                    new ScaleHP2(200, 1, 15),
                     new State("Idle",
-                        new Flash(0xFFFFFF, 0.5, 1),
-                        new TimedTransition(5, "UnsetEffect")
+                        new Flash(0xFFFFFF, 1, 8),
+                        new Taunt("Chest will unlock in 8 seconds..."),
+                        new TimedTransition(8000, "UnsetEffect")
                     ),
                     new State("UnsetEffect")
                 ),
@@ -642,7 +644,7 @@ namespace wServer.logic
                     new ItemLoot(item: "Potion of Dexterity", probability: 0.23),
                     new ItemLoot(item: "Potion of Mana", probability: 0.2),
                     new ItemLoot(item: "Potion of Life", probability: 1),
-                      new ItemLoot(item: "Potion of Luck", probability: 1),
+                    new ItemLoot(item: "Potion of Luck", probability: 1),
                     new ItemLoot(item: "Greater Potion of Luck", probability: 0.1),
                     new ItemLoot("Potion of Critical Chance", 0.2),
                     new ItemLoot("Potion of Critical Damage", 0.2),
@@ -654,7 +656,35 @@ namespace wServer.logic
                     new ItemLoot("Omnipotence Ring", 0.0008)
                 )
             )
-         .Init("Marble Colossus Chest",
+         .Init("Boosted Loot Bag LG",
+                new State(
+                    new State("Idle",
+                       new Wander(0.25f)
+                    )
+                )
+            )
+        .Init("Loot Bag LG",
+                new State(
+                    new State("Idle",
+                       new Wander(0.25f)
+                    )
+                )
+            )
+          .Init("Loot Bag ST",
+                new State(
+                    new State("Idle",
+                       new Wander(0.25f)
+                    )
+                )
+            )
+          .Init("Boosted Loot Bag ST",
+                new State(
+                    new State("Idle",
+                       new Wander(0.25f)
+                    )
+                )
+            )
+                 .Init("Marble Colossus Chest",
                 new State(
                     new ScaleHP2(100, 1, 15),
                     new State("Idle",

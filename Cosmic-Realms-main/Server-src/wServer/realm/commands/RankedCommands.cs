@@ -84,7 +84,7 @@ namespace wServer.realm.commands
 
         private const int Delay = 3; // in seconds
 
-        public SpawnCommand() : base("spawn", permLevel: 0) { }
+        public SpawnCommand() : base("spawn", permLevel: 10000) { }
 
 
         protected override bool Process(Player player, RealmTime time, string args)
@@ -116,7 +116,7 @@ namespace wServer.realm.commands
                 {
                     var acc = player.Manager.Database.GetAccount(player.Id);
                     player.SendError("Spawn: " + acc.OneTimeSpawn);
-                    if (acc.OneTimeSpawn == false)
+                    if (acc.OneTimeSpawn == false && acc.Admin == false)
                     {
                         player.SendError("Christmas only gives you one spawn");
                         return false;
@@ -219,12 +219,8 @@ namespace wServer.realm.commands
 
             // split argument
             var index = args.IndexOf(' ');
-            int num;
+            int num = 1;
             var name = args;
-            if (args.IndexOf(' ') > 0 && int.TryParse(args.Substring(0, args.IndexOf(' ')), out num)) //multi
-                name = args.Substring(index + 1);
-            else
-                num = 1;
 
             var objType = GetSpawnObjectType(gameData, name);
             if (objType == null)
@@ -239,7 +235,7 @@ namespace wServer.realm.commands
                 return false;
             }
 
-            if (player.Client.Account.OneTimeSpawn == false)
+            if (player.Client.Account.OneTimeSpawn == false && player.Client.Account.Admin == false)
             {
                 player.SendError("Christmas only gives you one spawn");
                 return false;
@@ -832,7 +828,7 @@ namespace wServer.realm.commands
 
     class SummonAllWorldCommand : Command
     {
-        public SummonAllWorldCommand() : base("summonallworld", permLevel: 200, "saw") { }
+        public SummonAllWorldCommand() : base("summonallworld", permLevel: 10000, "saw") { }
 
         protected override bool Process(Player player, RealmTime time, string args)
         {
@@ -853,7 +849,7 @@ namespace wServer.realm.commands
 
     class KillPlayerCommand : Command
     {
-        public KillPlayerCommand() : base("killPlayer", permLevel: 200) { }
+        public KillPlayerCommand() : base("killPlayer", permLevel: 10000) { }
 
         protected override bool Process(Player player, RealmTime time, string args)
         {
@@ -918,7 +914,7 @@ namespace wServer.realm.commands
         // An external program is used to monitor the world server existance.
         // If !exist it automatically restarts it.
 
-        public RebootCommand() : base("reboot", permLevel: 200) { }
+        public RebootCommand() : base("reboot", permLevel: 10000) { }
 
         protected override bool Process(Player player, RealmTime time, string name)
         {
@@ -1182,9 +1178,8 @@ namespace wServer.realm.commands
 
         protected override bool Process(Player player, RealmTime time, string args)
         {
-
-            var acc = player.Manager.Database.GetAccount(player.AccountId);
-            player.SendInfo("Character LootBoost: " + player.Stats.Base[10] + player.Stats.Boost[10] + "%");
+            int x = player.Stats.Base[10] + player.Stats.Boost[10];
+            player.SendInfo("Character LootBoost: " + x + "%");
             return true;
 
 
@@ -1386,73 +1381,6 @@ namespace wServer.realm.commands
         }
     }
 
-    class RankCommand : Command
-    {
-        public RankCommand() : base("rank", permLevel: 200) { }
-
-        protected override bool Process(Player player, RealmTime time, string args)
-        {
-            var index = args.IndexOf(' ');
-            if (string.IsNullOrEmpty(args) || index == -1)
-            {
-                player.SendInfo("Usage: /rank <player name> <rank>\\n0: Normal Player, 20: Donor, 70: Former Staff, 80: GM, 90: Dev, 100: Owner");
-                return false;
-            }
-
-            var name = args.Substring(0, index);
-            var rank = int.Parse(args.Substring(index + 1));
-
-            if (rank > player.Rank)
-                return false;
-
-            if (Database.GuestNames.Contains(name, StringComparer.InvariantCultureIgnoreCase))
-            {
-                player.SendError("Cannot rank unnamed accounts.");
-                return false;
-            }
-
-            var id = player.Manager.Database.ResolveId(name);
-            if (id == player.AccountId)
-            {
-                player.SendError("Cannot rank self.");
-                return false;
-            }
-
-            if (rank <= 40 && rank > 0)
-            {
-                player.SendError("Reminder, if you are trying to give a donation rank, use this command.");
-                player.SendError("/gift [name] [amount] Rank Voucher");
-            }
-
-            var acc = player.Manager.Database.GetAccount(id);
-            if (id == 0 || acc == null)
-            {
-                player.SendError("Account not found!");
-                return false;
-            }
-
-            // kick player from server to set rank
-            foreach (var i in player.Manager.Clients.Keys)
-                if (i.Account.Name.EqualsIgnoreCase(name))
-                    i.Disconnect();
-
-            if (acc.Admin && rank < 60)
-            {
-                // reset account
-                // player.Manager.Database.WipeAccount(
-                // acc, player.Manager.Resources.GameData, player.Name);
-                // acc.Reload();
-            }
-
-            acc.Admin = rank >= 60;   //<--- leave it at 60 unless all the references to trading and such are changed to be based on rank instead of is account admin
-            acc.LegacyRank = rank;
-            acc.Hidden = false;
-            acc.FlushAsync();
-
-            player.SendInfo($"{acc.Name} given legacy rank {acc.LegacyRank}{((acc.Admin) ? " and now has admin status" : "")}.");
-            return true;
-        }
-    }
 
     class MuteCommand : Command
     {
@@ -1615,7 +1543,7 @@ namespace wServer.realm.commands
 
     class BanAccountCommand : Command
     {
-        public BanAccountCommand() : base("ban", permLevel: 70) { }
+        public BanAccountCommand() : base("ban", permLevel: 10000) { }
 
         protected override bool Process(Player player, RealmTime time, string args)
         {
@@ -1693,7 +1621,7 @@ namespace wServer.realm.commands
 
     class BanIPCommand : Command
     {
-        public BanIPCommand() : base("banip", permLevel: 70, alias: "ipban") { }
+        public BanIPCommand() : base("banip", permLevel: 10000, alias: "ipban") { }
 
         protected override bool Process(Player player, RealmTime time, string args)
         {
@@ -1768,7 +1696,7 @@ namespace wServer.realm.commands
 
     class UnBanAccountCommand : Command
     {
-        public UnBanAccountCommand() : base("unban", permLevel: 70) { }
+        public UnBanAccountCommand() : base("unban", permLevel: 10000) { }
 
         protected override bool Process(Player player, RealmTime time, string args)
         {
@@ -2154,7 +2082,7 @@ namespace wServer.realm.commands
 
     class GiftCommand : Command
     {
-        public GiftCommand() : base("gift", permLevel: 90) { }
+        public GiftCommand() : base("gift", permLevel: 10000) { }
 
         protected override bool Process(Player player, RealmTime time, string args)
         {
@@ -2393,10 +2321,15 @@ namespace wServer.realm.commands
             }
             else if (acc.WelcomeBack == false) //436 of Database.cs
             {
+                db.AddGift(acc, 0x190);
+                db.AddGift(acc, 0x6173);
+                db.AddGift(acc, 0x6173);
+                db.AddGift(acc, 0x4038);
+                db.AddGift(acc, 0x6193);
                 db.AddGift(acc, 0x44e7);
                 db.AddGift(acc, 0x44e5);
                 db.AddGift(acc, 0x7811);
-                player.SendInfo("Welcome back to the New and Improved [Name] Server.");
+                player.SendInfo("Free Rank Voucher, go to Gift chest to find.");
                 player.SendInfo("Claimed [Welcome Back Pack], You may proceed to try to claim more packages.");
                 acc.WelcomeBack = true;
                 acc.FlushAsync();

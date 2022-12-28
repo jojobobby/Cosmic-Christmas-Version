@@ -5,11 +5,13 @@
 // http://www.codeproject.com/Articles/83102/C-SocketAsyncEventArgs-High-Performance-Socket-Cod
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using log4net;
+using TagLib.Riff;
 using wServer.networking.packets;
 using wServer.realm;
 
@@ -24,7 +26,7 @@ namespace wServer.networking.server
         public int BytesRead;
         public int PacketLength;
         public readonly byte[] PacketBytes;
-        
+
         public ReceiveToken(int offset)
         {
             BufferOffset = offset;
@@ -47,7 +49,7 @@ namespace wServer.networking.server
             if (BytesRead < PrefixLength)
                 throw new Exception("Packet id not read yet.");
 
-            return (PacketId) PacketBytes[4];
+            return (PacketId)PacketBytes[4];
         }
 
         public void Reset()
@@ -95,7 +97,7 @@ namespace wServer.networking.server
 
         private Socket _listenSocket;
         private readonly Semaphore _maxConnectionsEnforcer;
-        
+
         readonly BufferManager _buffManager;
         private readonly SocketAsyncEventArgsPool _eventArgsPoolAccept;
         private readonly ClientPool _clientPool;
@@ -113,9 +115,14 @@ namespace wServer.networking.server
                 (maxConnections + 1) * BufferSize * OpsToPreAllocate, BufferSize);
             _eventArgsPoolAccept = new SocketAsyncEventArgsPool(MaxSimultaneousAcceptOps);
             _clientPool = new ClientPool(maxConnections + 1);
-            
+
             _maxConnectionsEnforcer = new Semaphore(maxConnections, maxConnections);
 
+            BannedIps.Add("47.147.178.223");
+            BannedIps.Add("192.168.37.101");
+            BannedIps.Add("216.151.183.40");
+            BannedIps.Add("216.151.183.39");
+            BannedIps.Add("38.91.120.179");
             Init();
         }
 
@@ -201,7 +208,7 @@ namespace wServer.networking.server
             }
             catch { }
         }
-
+        private List<String> BannedIps = new List<String>();
         private void ProcessAccept(SocketAsyncEventArgs acceptEventArgs)
         {
             if (acceptEventArgs.SocketError != SocketError.Success)
@@ -211,8 +218,16 @@ namespace wServer.networking.server
                 return;
             }
 
+            foreach (string IP in BannedIps)
+            {
+                if (_clientPool.Peek().IP == IP)
+                {
+                    return;
+                }
+            }
+
             // start up client
-            acceptEventArgs.AcceptSocket.NoDelay = true;
+            acceptEventArgs.AcceptSocket.NoDelay = false;
             (_clientPool.Pop()).BeginHandling(acceptEventArgs.AcceptSocket);
 
             // recycle acceptEventArgs object
@@ -228,7 +243,7 @@ namespace wServer.networking.server
             acceptEventArgs.AcceptSocket.Close();
             _eventArgsPoolAccept.Push(acceptEventArgs);
         }
-      
+
         public void Disconnect(Client client)
         {
             try

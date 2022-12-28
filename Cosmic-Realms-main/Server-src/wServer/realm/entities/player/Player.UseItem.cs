@@ -358,7 +358,7 @@ namespace wServer.realm.entities
                     FameCounter.DrinkPot();
                 }
 
-                   if (item.Consumable || item.SlotType == slotType )
+                if (item.Consumable || item.SlotType == slotType)
                     Activate(time, item, pos);
                 else
                     Client.SendPacket(new InvResult() { Result = 1 });
@@ -383,18 +383,22 @@ namespace wServer.realm.entities
         }
         private void Activate(RealmTime time, Item item, Position target)
         {
-            if (freeAbilityUse) { 
+            if (freeAbilityUse)
+            {
                 freeAbilityUse = false;
             }
-            else { 
+            else
+            {
                 MP -= item.MpCost;
             }
 
 
-            if (HP < item.HpCost) {
-                HP = HP + item.HpCost; 
+            if (HP < item.HpCost)
+            {
+                HP = HP + item.HpCost;
             }
-            else {
+            else
+            {
                 HP -= item.HpCost;
             }
 
@@ -661,6 +665,9 @@ namespace wServer.realm.entities
                     case ActivateEffects.Sigil:
                         AESigil(time, item, target, eff);
                         break;
+                    case ActivateEffects.Omnipotent:
+                        AEOmnipotent(time, item, target, eff);
+                        break;
                     default:
                         Log.WarnFormat("Activate effect {0} not implemented.", eff.Effect);
                         break;
@@ -668,6 +675,9 @@ namespace wServer.realm.entities
             }
             for (var i = 0; i < 4; i++)
             {
+                if (Inventory[i] == null)
+                    return;
+
                 switch (Inventory[i].ObjectId)
                 {
                     case "Drannol's Judgement":
@@ -711,7 +721,8 @@ namespace wServer.realm.entities
             var x = new Placeholder(Manager, 1500);
             x.Move(target.X, target.Y);
             Owner.EnterWorld(x);
-            Owner.Timers.Add(new WorldTimer(1500, (world, t) => {
+            Owner.Timers.Add(new WorldTimer(1500, (world, t) =>
+            {
                 world.BroadcastPacketNearby(new ShowEffect
                 {
                     EffectType = EffectType.AreaBlast,
@@ -733,7 +744,8 @@ namespace wServer.realm.entities
             WorldTimer tmr = null;
             var x = 0;
 
-            Func<World, RealmTime, bool> poisonTick = (w, t) => {
+            Func<World, RealmTime, bool> poisonTick = (w, t) =>
+            {
                 if (enemy.Owner == null || w == null)
                     return true;
 
@@ -804,7 +816,8 @@ namespace wServer.realm.entities
             for (var i = 0; i < targets.Length; i++)
             {
                 targets[i] = current;
-                var next = current.GetNearestEntity(10, false, e => {
+                var next = current.GetNearestEntity(10, false, e =>
+                {
                     if (!(e is Enemy) ||
                         e.HasConditionEffect(ConditionEffects.Invincible) ||
                         e.HasConditionEffect(ConditionEffects.Stasis) ||
@@ -861,7 +874,8 @@ namespace wServer.realm.entities
             WorldTimer tmr = null;
             var x = 0;
 
-            Func<World, RealmTime, bool> burnTick = (w, t) => {
+            Func<World, RealmTime, bool> burnTick = (w, t) =>
+            {
                 if (enemy.Owner == null || w == null)
                     return true;
 
@@ -1225,37 +1239,37 @@ namespace wServer.realm.entities
             }
 
         }
-        
-            private void AEUnlockSkin(RealmTime time, Item item, ActivateEffect eff)
-            {
-                var acc = Client.Account;
-                if (Client.Player.Owner == null || Client.Player.Owner is Test)
-                {
-                    SendInfo("Can't use skins in test worlds.");
-                    return;
-                }
 
-                var skins = Client.Account.Skins.ToList();
-                if (!skins.Contains(eff.SkinType))
-                {
-                    Client.Manager.Database.PurchaseSkin(Client.Account, eff.SkinType, 0);
-                    Client.SendPacket(new ReskinUnlock
-                    {
-                        SkinId = eff.SkinType
-                    });
-                    SendInfo($"New skin unlocked successfully. Change skins in your Vault, or start a new character to use.");
-                    return;
-                }
-                else
-                {
-                    acc.Fame += 150;
-                    acc.FlushAsync();
-                    SendInfo("You already own this skin. [+150 fame]");
-                    return;
-                }
+        private void AEUnlockSkin(RealmTime time, Item item, ActivateEffect eff)
+        {
+            var acc = Client.Account;
+            if (Client.Player.Owner == null || Client.Player.Owner is Test)
+            {
+                SendInfo("Can't use skins in test worlds.");
+                return;
             }
-            
-           
+
+            var skins = Client.Account.Skins.ToList();
+            if (!skins.Contains(eff.SkinType))
+            {
+                Client.Manager.Database.PurchaseSkin(Client.Account, eff.SkinType, 0);
+                Client.SendPacket(new ReskinUnlock
+                {
+                    SkinId = eff.SkinType
+                });
+                SendInfo($"New skin unlocked successfully. Change skins in your Vault, or start a new character to use.");
+                return;
+            }
+            else
+            {
+                acc.Fame += 150;
+                acc.FlushAsync();
+                SendInfo("You already own this skin. [+150 fame]");
+                return;
+            }
+        }
+
+
 
         private void AECreatePet(RealmTime time, Item item, Position target, ActivateEffect eff)
         {
@@ -1291,7 +1305,7 @@ namespace wServer.realm.entities
             var acc = Manager.Database.GetAccount(AccountId);
             acc.ItemMasteryPoints += eff.Amount;
             acc.FlushAsync();
-            SendInfo($"You have gained { eff.Amount } Mastery Points. A total of [{ acc.ItemMasteryPoints }] Mastery Points");
+            SendInfo($"You have gained {eff.Amount} Mastery Points. A total of [{acc.ItemMasteryPoints}] Mastery Points");
         }
 
         private void AEPetWhite(RealmTime time, Item item, Position target, ActivateEffect eff)
@@ -1786,7 +1800,8 @@ namespace wServer.realm.entities
             var x = Client.Account.Rank;
             var db = Manager.Database;
             var y = 0;
-            if (acc.Rank < 40) {
+            if (acc.Rank < 40)
+            {
                 acc.LegacyRank += eff.Amount;
                 acc.FlushAsync();
                 if (acc.Rank > 40)
@@ -2016,6 +2031,44 @@ namespace wServer.realm.entities
 
             }
         }
+        private void AEOmnipotent(RealmTime time, Item item, Position target, ActivateEffect eff)
+        {
+            {
+
+
+
+                var gameData = Manager.Resources.GameData;
+
+                var list = new List<string>
+                {
+                "Everlasting Inferno",
+                "Conflict's Elimination",
+                "Revolting Flame Amulet",
+                "Blazing Combustion",
+                "Fractal Nova",
+                "Heretical Garments",
+                "Infragilis",
+                "The Book of Balance",
+                "Infinite Knowledge",
+                "Slasher",
+                "Knight's Vow Armor",
+                "Knight's Vow Shield",
+                "Beyonds' Lighter",
+                "Star in a Bottle",
+                };
+
+
+                var pick = Random.Next(list.Count);
+                SendInfo("You've got a: [" + list[pick] + "]");
+
+                var availableSlot = Inventory.GetAvailableInventorySlot(item);
+
+                var etem = gameData.Items[gameData.IdToObjectType[list[pick]]];
+                Inventory[availableSlot] = etem;
+
+
+            }
+        }
         private void AEUseBoxMC(RealmTime time, Item item, Position target, ActivateEffect eff)
         {
             {
@@ -2026,7 +2079,7 @@ namespace wServer.realm.entities
 
                 var list = new List<string>
                 {"Char Slot Unlocker",
-                "Vault Chest Unlocker", 
+                "Vault Chest Unlocker",
                 "Effusion of Dexterity",
                 "Effusion of Life",
                 "Effusion of Mana",
@@ -2175,7 +2228,7 @@ namespace wServer.realm.entities
                 var LootBoostPick = Random.Next(LootBoost.Count);
                 var CratesPick = Random.Next(Crates.Count);
                 var Crates3Pick = Random.Next(Crates3.Count);
-                
+
                 var etem3 = gameData.IdToObjectType[Crates3[Crates3Pick]];
                 var etem2 = gameData.IdToObjectType[Crates[CratesPick]];
                 var etem = gameData.IdToObjectType[LootBoost[LootBoostPick]];
@@ -2246,7 +2299,7 @@ namespace wServer.realm.entities
                     "Apple",
                     "Lunar Ascension"
                 };
-           
+
                 var ItemPick = Random.Next(Item.Count);
                 var availableSlot = Inventory.GetAvailableInventorySlot(item);
                 var etem = gameData.Items[gameData.IdToObjectType[Item[ItemPick]]];
@@ -2257,12 +2310,12 @@ namespace wServer.realm.entities
 
             }
         }
-       
+
         private void AEIncrementStat(RealmTime time, Item item, Position target, ActivateEffect eff) // here
         {
             var idx = StatsManager.GetStatIndex((StatsType)eff.Stats);
-            var statInfo = Manager.Resources.GameData.Classes[ObjectType].Stats; 
-            for(int i = 0; i <= 12; i++)
+            var statInfo = Manager.Resources.GameData.Classes[ObjectType].Stats;
+            for (int i = 0; i <= 12; i++)
             {
                 if (i == idx)
                 {
@@ -2295,7 +2348,7 @@ namespace wServer.realm.entities
                     Stats.Base[2] += eff.Amount;
                     acc.AttackStatsMoon += eff.Amount;
                     acc.FlushAsync();
-                    SendInfo($"You have gained { eff.Amount } extra Attack. Total [{ acc.AttackStatsMoon}] / 10");
+                    SendInfo($"You have gained {eff.Amount} extra Attack. Total [{acc.AttackStatsMoon}] / 10");
                     Client.SendPacket(new ShowEffect()
                     {
                         EffectType = EffectType.AreaBlast,
@@ -2325,7 +2378,7 @@ namespace wServer.realm.entities
                     Stats.Base[3] += eff.Amount;
                     acc.DefensePotsMoon += eff.Amount;
                     acc.FlushAsync();
-                    SendInfo($"You have gained { eff.Amount } extra Defense. Total [{ acc.DefensePotsMoon}] / 10");
+                    SendInfo($"You have gained {eff.Amount} extra Defense. Total [{acc.DefensePotsMoon}] / 10");
                     Client.SendPacket(new ShowEffect()
                     {
                         EffectType = EffectType.AreaBlast,
@@ -2354,7 +2407,7 @@ namespace wServer.realm.entities
                     Stats.Base[4] += eff.Amount;
                     acc.SpeedPotsMoon += eff.Amount;
                     acc.FlushAsync();
-                    SendInfo($"You have gained { eff.Amount } extra Speed. Total [{ acc.SpeedPotsMoon}] / 10");
+                    SendInfo($"You have gained {eff.Amount} extra Speed. Total [{acc.SpeedPotsMoon}] / 10");
 
                     Client.SendPacket(new ShowEffect()
                     {
@@ -2384,7 +2437,7 @@ namespace wServer.realm.entities
                     Stats.Base[6] += eff.Amount;
                     acc.VitalityPotsMoon += eff.Amount;
                     acc.FlushAsync();
-                    SendInfo($"You have gained { eff.Amount } extra Vitality. Total [{ acc.VitalityPotsMoon}] / 10");
+                    SendInfo($"You have gained {eff.Amount} extra Vitality. Total [{acc.VitalityPotsMoon}] / 10");
 
                     Client.SendPacket(new ShowEffect()
                     {
@@ -2414,7 +2467,7 @@ namespace wServer.realm.entities
                     Stats.Base[7] += eff.Amount;
                     acc.WisdomPotsMoon += eff.Amount;
                     acc.FlushAsync();
-                    SendInfo($"You have gained { eff.Amount } extra Wisdom. Total [{ acc.WisdomPotsMoon}] / 10");
+                    SendInfo($"You have gained {eff.Amount} extra Wisdom. Total [{acc.WisdomPotsMoon}] / 10");
 
                     Client.SendPacket(new ShowEffect()
                     {
@@ -2445,7 +2498,7 @@ namespace wServer.realm.entities
                     Stats.Base[5] += eff.Amount;
                     acc.DexterityPotsMoon += eff.Amount;
                     acc.FlushAsync();
-                    SendInfo($"You have gained { eff.Amount } extra Dexterity. Total [{ acc.DexterityPotsMoon}] / 10");
+                    SendInfo($"You have gained {eff.Amount} extra Dexterity. Total [{acc.DexterityPotsMoon}] / 10");
 
                     Client.SendPacket(new ShowEffect()
                     {
@@ -2475,7 +2528,7 @@ namespace wServer.realm.entities
                     Stats.Base[0] += eff.Amount * 5;
                     acc.LifePotsMoon += eff.Amount * 5;
                     acc.FlushAsync();
-                    SendInfo($"You have gained { eff.Amount } extra Health. Total [{ acc.LifePotsMoon}] / 50");
+                    SendInfo($"You have gained {eff.Amount} extra Health. Total [{acc.LifePotsMoon}] / 50");
 
                     Client.SendPacket(new ShowEffect()
                     {
@@ -2507,7 +2560,7 @@ namespace wServer.realm.entities
                     Stats.Base[1] += eff.Amount * 5;
                     acc.ManaPotsMoon += eff.Amount * 5;
                     acc.FlushAsync();
-                    SendInfo($"You have gained { eff.Amount } extra Mana. Total [{ acc.ManaPotsMoon}] / 50");
+                    SendInfo($"You have gained {eff.Amount} extra Mana. Total [{acc.ManaPotsMoon}] / 50");
 
                     Client.SendPacket(new ShowEffect()
                     {
@@ -2537,7 +2590,7 @@ namespace wServer.realm.entities
                     Stats.Base[12] += eff.Amount;
                     acc.CritHitPotsMoon += eff.Amount;
                     acc.FlushAsync();
-                    SendInfo($"You have gained { eff.Amount } extra Critical Chance. Total [{ acc.CritHitPotsMoon}] / 10");
+                    SendInfo($"You have gained {eff.Amount} extra Critical Chance. Total [{acc.CritHitPotsMoon}] / 10");
 
                     Client.SendPacket(new ShowEffect()
                     {
@@ -2568,7 +2621,7 @@ namespace wServer.realm.entities
                     Stats.Base[11] += eff.Amount;
                     acc.CritDmgPotsMoon += eff.Amount;
                     acc.FlushAsync();
-                    SendInfo($"You have gained { eff.Amount } extra Critical Damage. Total [{ acc.CritDmgPotsMoon}] / 10");
+                    SendInfo($"You have gained {eff.Amount} extra Critical Damage. Total [{acc.CritDmgPotsMoon}] / 10");
 
                     Client.SendPacket(new ShowEffect()
                     {
@@ -2621,12 +2674,12 @@ namespace wServer.realm.entities
         }
         private void AE5Fragments(RealmTime time, Item item, Position target, ActivateEffect eff) // here
         {
-          
+
             ushort gift = 0x913;
             SendInfo($"You have forged A [Crown].");
             var availableSlot = Inventory.GetAvailableInventorySlot(item);
             Inventory[availableSlot] = Manager.Resources.GameData.Items[gift];
-            
+
 
         }
         private void AEMoonPrimed(RealmTime time, Item item, Position target, ActivateEffect eff) // here
@@ -3008,7 +3061,7 @@ namespace wServer.realm.entities
             TrickDecoy.Move(X, Y);
             Owner.EnterWorld(TrickDecoy);
             SendInfo($"False");
-            
+
         }
         /*
         private void AEDecoy(RealmTime time, Item item, Position target, ActivateEffect eff)
@@ -3269,7 +3322,7 @@ namespace wServer.realm.entities
                     }));
                 }
             }
-           
+
         }
 
         private void AETOMEAB(RealmTime time, Item item, Position target, ActivateEffect eff)
@@ -3533,7 +3586,7 @@ namespace wServer.realm.entities
         {
 
 
-            
+
             var RealDamage = (eff.TotalDamage / 2);
 
             var Wisdom = (Stats.Base[7] + Stats.Boost[7]);
@@ -3562,7 +3615,7 @@ namespace wServer.realm.entities
                 }
             };
 
-          
+
             var enemies = new List<Enemy>();
             var totalDmg = 0;
             Owner.AOE(target, range, false, enemy => enemies.Add(enemy as Enemy));
@@ -3668,7 +3721,7 @@ namespace wServer.realm.entities
                     Message = "+" + pick + " Dungeon TQ Uses"
                 }, PacketPriority.Low);
 
-            SendInfo($"You now have { pick } extra Dungeon tq's. Total [{ acc.TQDamount}]");
+            SendInfo($"You now have {pick} extra Dungeon tq's. Total [{acc.TQDamount}]");
         }
 
         private void AETQMscroll(RealmTime time, Item item, Position target, ActivateEffect eff)
@@ -3702,7 +3755,7 @@ namespace wServer.realm.entities
                     Message = "+" + pick + " Moon TQ Uses"
                 }, PacketPriority.Low);
 
-            SendInfo($"You now have { pick } extra Moon tq's. Total [{ acc.TQMamount}]");
+            SendInfo($"You now have {pick} extra Moon tq's. Total [{acc.TQMamount}]");
         }
         private void AETQscroll(RealmTime time, Item item, Position target, ActivateEffect eff)
         {
@@ -3735,7 +3788,7 @@ namespace wServer.realm.entities
                     Message = "+" + pick + " Earth TQ Uses"
                 }, PacketPriority.Low);
 
-            SendInfo($"You now have { pick } extra earth tq's. Total [{ acc.TQamount}]");
+            SendInfo($"You now have {pick} extra earth tq's. Total [{acc.TQamount}]");
         }
         //TQscroll
         private void AEMagicNova(RealmTime time, Item item, Position target, ActivateEffect eff)
@@ -4039,7 +4092,7 @@ namespace wServer.realm.entities
             var projV = (int)(20 * (1 + (Stats[7] / 100.0)));
             var prjs = new Projectile[projV];
             var prjDesc = item.Projectiles[0]; //Assume only one
-            var batch = new Packet[projV+1];
+            var batch = new Packet[projV + 1];
             for (var i = 0; i < projV; i++)
             {
                 var proj = CreateProjectile(prjDesc, item.ObjectType,
@@ -4156,7 +4209,7 @@ namespace wServer.realm.entities
         {
             var maxHp = player.Stats[0];
             var newHp = Math.Min(maxHp, player.HP + amount);
-            
+
 
             pkts.Add(new ShowEffect()
             {
@@ -4171,8 +4224,8 @@ namespace wServer.realm.entities
                 Message = "+" + (newHp - player.HP)
             });
 
-             if (newHp == player.HP)
-              return;
+            if (newHp == player.HP)
+                return;
             player.HP = newHp;
         }
 
@@ -4241,7 +4294,7 @@ namespace wServer.realm.entities
             {
                 if (enemy.Owner == null || w == null)
                     return true;
-                
+
                 if (x % 4 == 0) // make sure to change this if timer delay is changed
                 {
                     var thisDmg = perDmg;

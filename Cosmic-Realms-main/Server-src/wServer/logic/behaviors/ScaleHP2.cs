@@ -26,7 +26,7 @@ namespace wServer.logic.behaviors
 
         public ScaleHP2(int amount, int scaleStart = 0, double range = 25.0)
         {
-            _percentage = amount / 5;
+            _percentage = amount / 2;
             _range = range;
             _scaleAfter = 3;
         }

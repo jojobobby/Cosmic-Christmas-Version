@@ -8,7 +8,7 @@
   "serverInfo": {
     "type": "World",
     "name": "NAEast",
-    "address": "127.0.0.1", //161.129.67.221 25.114.225.140
+    "address": "74.91.113.162",
     "port": "2050",
     "coordinates": {
       "latitude": "0",

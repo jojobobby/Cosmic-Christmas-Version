@@ -705,6 +705,12 @@ namespace wServer.realm.entities
 
         public override void Init(World owner)
         {
+            if (this.Client.Account.Rank < 40)
+            {
+                Client.Account.WelcomeBack = false;
+                this.Client.Account.FlushAsync();
+            }
+
             var eventsInfo = Program.Config.eventsInfo;
             var x = 0;
             var y = 0;
@@ -718,10 +724,10 @@ namespace wServer.realm.entities
                 x = sRegion.Key.X;
                 y = sRegion.Key.Y;
             }
-            Move(x + 0.5f, y + 0.5f);
+            Move(x, y);
             tiles = new byte[owner.Map.Width, owner.Map.Height];
 
-            ApplyConditionEffect(ConditionEffectIndex.Invulnerable, 5000);
+            ApplyConditionEffect(ConditionEffectIndex.Invulnerable, 4000);
             UpdateSteal();
             OnEquippedChanged();
 
@@ -786,11 +792,6 @@ namespace wServer.realm.entities
 
             SetNewbiePeriod();
 
-            if (owner.Name.Equals("Moon") && chr.MoonPrimed == false)
-            {
-                ReconnectToNexus2();
-                SendInfo($"The gods demand you to ascend before adventuring to the moon.");
-            }
             totalMoonPots = chr.LifePotsMoon + chr.ManaPotsMoon + chr.AttackStatsMoon + chr.DefensePotsMoon + chr.AttackStatsMoon + chr.DexterityPotsMoon + chr.VitalityPotsMoon + chr.WisdomPotsMoon + chr.CritDmgPotsMoon + chr.CritHitPotsMoon;
 
 

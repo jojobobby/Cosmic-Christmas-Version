@@ -160,7 +160,8 @@ namespace wServer.realm
             AddRecipe("Legendary Sor Crystal", "Free Legendary Sor Converter", "Free Sor Crystal");//
             AddRecipe("Legendary Sor Crystal", "Legendary Sor Converter", "Sor Crystal");//
 
-            AddRecipe("Predator Necklace", "Hunter Necklace", "Legendary Sor Crystal", "Fragment of the Earth");//
+            AddRecipe("Hunter Necklace", "Legendary Sor Crystal", "Legendary Sor Crystal");//
+            AddRecipe("Predator Necklace", "Hunter Necklace", "Legendary Sor Crystal");//
 
             AddRecipe("Drannol's Judgement", "Predator Necklace", "Legendary Sor Crystal");//
             AddRecipe("Fractal Nova", "Drannol's Judgement", "Legendary Sor Crystal");//
@@ -175,12 +176,11 @@ namespace wServer.realm
             AddRecipe("Gargoyle Stoneplate", "Gargoyle Crusher", "Legendary Sor Crystal");//
             AddRecipe("The Infernus", "Gargoyle Stoneplate", "Legendary Sor Crystal");//
             AddRecipe("March of the Army", "The Infernus", "Legendary Sor Crystal");//
-            AddRecipe("Vardon's Resilience", "March of the Army", "Legendary Sor Crystal");//
-            AddRecipe("Vardon's Resilience", "March of the Army", "Legendary Sor Crystal");//
+            AddRecipe("Vardon's Resilience", "March of the Army", "Legendary Sor Crystal");
 
+            AddRecipe("Legendary Sor Crystal", "Fragment of the Earth");//
 
-
-            AddRecipe("Lunar Ascension", "Fragment of the Moon", "Fragment of the Earth", "Cyberious Infused Shard");//
+            AddRecipe("Lunar Ascension", "Fragment of the Earth", "Fragment of the Earth");//
 
 
 
@@ -192,6 +192,8 @@ namespace wServer.realm
             AddRecipe("Necklace of Lunar Magic", "Necklace of Magic", "Composed Moon Essence", "Fragment of the Earth", "Cyberious Infused Shard");//
 
             AddRecipe("Compacted Lunar Trap", "Moon Essence Trap", "Moon Essence Trap", "Cyberious's Plate", "Scraps of the Descendant", "Composed Moon Essence");
+            AddRecipe("Supreme Alien Core: Powered Reactor", "Super Alien Core: Power", "Advanced Alien Tech", "Legendary Sor Crystal");
+
             AddRecipe("Super Alien Core: Power", "Advanced Alien Tech", "Powered Reactor", "Alien Core: Ruby", "Alien Core: Diamond", "Alien Core: Gold", "Alien Core: Emerald");
 
             AddRecipe("Alien Core: Ruby", "Destructor AI Module", "Advanced Alien Tech", "Power Battery");
@@ -261,7 +263,7 @@ namespace wServer.realm
             AddRecipe("Frozen Staff of Esben", "Frozen Ice Shard", "Staff of Esben");//
             AddRecipe("Frozen Crystal Wand", "Frozen Ice Shard", "Crystal Wand");// "Golden Ankh"
 
-            AddRecipe("Exalted Stone Sword", "Spell Scroll", "Jade", "Cyberious's Plate", "Ancient Stone Sword");
+            AddRecipe("Exalted Stone Sword", "Jade", "Cyberious's Plate", "Ancient Stone Sword");
 
             AddRecipe("Snake Skin Bulwark", "Wand of the Bulwark", "Shard of Fire", "Power Battery", "Red Ichor");
             AddRecipe("Fortification", "Topaz", "Jade", "Amethyst", "Snake Skin Bulwark", "Cyberious Infused Shard", "Glowing Void Matter");

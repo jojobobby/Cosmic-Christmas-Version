@@ -169,19 +169,27 @@ namespace wServer.logic.loot
                                 reqDrops[i]--;
                             }
                         }
-                        else if ((i.Item.BagType == 9 || i.Item.LG || i.Item.MY || i.Item.MLG) && dmgpercentage < 1) { } //If item is a legendary, you need to deal 2% of the bosses health to qualify.
-                        else if ((i.Item.BagType == 10 || i.Item.Mythical) && dmgpercentage < 1) { } //If item is a mythical, you need to deal 4% of the bosses health to qualify.
-                        else if ((i.Item.BagType == 12 || i.Item.Radiant) && dmgpercentage < 1) { } //If item is a Radiant, you need to deal 5% of the bosses health to qualify.
+                        else if ((i.Item.BagType == 9 || i.Item.LG || i.Item.MY || i.Item.MLG) && dmgpercentage < 1)
+                        {
+                        } //If item is a legendary, you need to deal 2% of the bosses health to qualify.
+                        else if ((i.Item.BagType == 10 || i.Item.Mythical) && dmgpercentage < 1)
+                        {
+                        } //If item is a mythical, you need to deal 4% of the bosses health to qualify.
+                        else if ((i.Item.BagType == 12 || i.Item.Radiant) && dmgpercentage < 1)
+                        {
+                        } //If item is a Radiant, you need to deal 5% of the bosses health to qualify.
                         else if (i.Damagebased)//This is to make sure loot like Mighty Chest aren't giving you extra lb from soloing them.
                         {
-                            if (Rand.NextDouble() < LootChance * (1 + (lootDropBoost + luckStatBoost + eventBoost + damagelootboost + DMGExtraLB))) //MAX: 50 + (50 - 145) + 100 + 25 = 225% increase to 325% increase
+                            if (Rand.NextDouble() < LootChance * (1 + (lootDropBoost + luckStatBoost + eventBoost + damagelootboost + DMGExtraLB)) * 15) //MAX: 50 + (50 - 145) + 100 + 25 = 225% increase to 325% increase
                             {
+                                player.Item1.SendInfo("Loot was boosted by: " + (1 + (lootDropBoost + luckStatBoost + eventBoost + damagelootboost + DMGExtraLB)) * 15);
                                 loot.Add(i.Item);
                                 reqDrops[i]--;
                             }
                         }
-                        else if (Rand.NextDouble() < LootChance * (1 + (lootDropBoost + luckStatBoost + eventBoost)))
+                        else if (Rand.NextDouble() < LootChance * (1 + (lootDropBoost + luckStatBoost + eventBoost)) * 15)
                         {
+                            player.Item1.SendInfo("Loot was boosted by: " + LootChance * (1 + (lootDropBoost + luckStatBoost + eventBoost)) * 15);
                             loot.Add(i.Item);
                             reqDrops[i]--;
                         }
@@ -379,7 +387,7 @@ namespace wServer.logic.loot
             }
             if (leggie.Count != 0)
             {
-                enemy.Manager.Chat.LootNotifier($"[{owners[0].Name}] just got some Legendary loot, [{string.Join(",", leggie)}] with {dmgpercentage}% damage dealt!");
+                //enemy.Manager.Chat.LootNotifier($"[{owners[0].Name}] just got some Legendary loot, [{string.Join(",", leggie)}] with {dmgpercentage}% damage dealt!");
             }
             if (Radi.Count != 0)
             {
@@ -442,7 +450,7 @@ namespace wServer.logic.loot
             container.Move(
                 enemy.X + (float)((Rand.NextDouble() * 2 - 1) * 0.5),
                 enemy.Y + (float)((Rand.NextDouble() * 2 - 1) * 0.5));
-            container.SetDefaultSize(bagType > 3 ? 90 : 80);
+            container.SetDefaultSize(bagType > 3 ? bagType > 9 ? 15 : 90 : 80);
             enemy.Owner.EnterWorld(container);
         }
     }

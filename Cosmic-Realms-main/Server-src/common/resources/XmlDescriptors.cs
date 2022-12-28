@@ -29,55 +29,55 @@ namespace common.resources
     [Flags]
     public enum ConditionEffects : ulong
     {
-        Dead =              1 << 0,
-        Quiet =             1 << 1,
-        Weak =              1 << 2,
-        Slowed =            1 << 3,
-        Sick =              1 << 4,
-        Dazed =             1 << 5,
-        Stunned =           1 << 6,
-        Blind =             1 << 7,
-        Hallucinating =     1 << 8,
-        Drunk =             1 << 9,
-        Confused =          1 << 10,
-        StunImmume =        1 << 11,
-        Invisible =         1 << 12,
-        Paralyzed =         1 << 13,
-        Speedy =            1 << 14,
-        Bleeding =          1 << 15,
-        ArmorBreakImmune =  1 << 16,
-        Healing =           1 << 17,
-        Damaging =          1 << 18,
-        Berserk =           1 << 19,
-        Paused =            1 << 20,
-        Stasis =            1 << 21,
-        StasisImmune =      1 << 22,
-        Invincible =        1 << 23,
-        Invulnerable =      1 << 24,
-        Armored =           1 << 25,
-        ArmorBroken =       1 << 26,
-        Hexed =             1 << 27,
-        NinjaSpeedy =       1 << 28,
-        Unstable =          1 << 29,
-        Darkness =          1 << 30,
-        SlowedImmune =      (ulong) 1 << 31,
-        DazedImmune =       (ulong) 1 << 32,
-        ParalyzeImmune =    (ulong) 1 << 33,
-        Petrify =           (ulong) 1 << 34,
-        PetrifyImmune =     (ulong) 1 << 35,
-        PetDisable =        (ulong) 1 << 36,
-        Curse =             (ulong) 1 << 37,
-        CurseImmune =       (ulong) 1 << 38,
-        HPBoost =           (ulong) 1 << 39,
-        MPBoost =           (ulong) 1 << 40,
-        AttBoost =          (ulong) 1 << 41,
-        DefBoost =          (ulong) 1 << 42,
-        SpdBoost =          (ulong) 1 << 43,
-        DexBoost =          (ulong) 1 << 44,
-        VitBoost =          (ulong) 1 << 45,
-        WisBoost =          (ulong) 1 << 46,
-        Hidden =            (ulong) 1 << 47,
-        Muted =             (ulong) 1 << 48,
+        Dead = 1 << 0,
+        Quiet = 1 << 1,
+        Weak = 1 << 2,
+        Slowed = 1 << 3,
+        Sick = 1 << 4,
+        Dazed = 1 << 5,
+        Stunned = 1 << 6,
+        Blind = 1 << 7,
+        Hallucinating = 1 << 8,
+        Drunk = 1 << 9,
+        Confused = 1 << 10,
+        StunImmume = 1 << 11,
+        Invisible = 1 << 12,
+        Paralyzed = 1 << 13,
+        Speedy = 1 << 14,
+        Bleeding = 1 << 15,
+        ArmorBreakImmune = 1 << 16,
+        Healing = 1 << 17,
+        Damaging = 1 << 18,
+        Berserk = 1 << 19,
+        Paused = 1 << 20,
+        Stasis = 1 << 21,
+        StasisImmune = 1 << 22,
+        Invincible = 1 << 23,
+        Invulnerable = 1 << 24,
+        Armored = 1 << 25,
+        ArmorBroken = 1 << 26,
+        Hexed = 1 << 27,
+        NinjaSpeedy = 1 << 28,
+        Unstable = 1 << 29,
+        Darkness = 1 << 30,
+        SlowedImmune = (ulong)1 << 31,
+        DazedImmune = (ulong)1 << 32,
+        ParalyzeImmune = (ulong)1 << 33,
+        Petrify = (ulong)1 << 34,
+        PetrifyImmune = (ulong)1 << 35,
+        PetDisable = (ulong)1 << 36,
+        Curse = (ulong)1 << 37,
+        CurseImmune = (ulong)1 << 38,
+        HPBoost = (ulong)1 << 39,
+        MPBoost = (ulong)1 << 40,
+        AttBoost = (ulong)1 << 41,
+        DefBoost = (ulong)1 << 42,
+        SpdBoost = (ulong)1 << 43,
+        DexBoost = (ulong)1 << 44,
+        VitBoost = (ulong)1 << 45,
+        WisBoost = (ulong)1 << 46,
+        Hidden = (ulong)1 << 47,
+        Muted = (ulong)1 << 48,
         Haste = (ulong)1 << 49,
         Swift = (ulong)1 << 50,
         Tired = (ulong)1 << 51,
@@ -166,7 +166,7 @@ namespace common.resources
     }
 
     public class ConditionEffect
-    { 
+    {
         public ConditionEffectIndex Effect { get; set; }
         public int DurationMS { get; set; }
         public float Range { get; set; }
@@ -291,7 +291,7 @@ namespace common.resources
         ClearConditionEffectSelf,
         Dye,
         ShurikenAbility,
-        
+
         TomeDamage,
         MultiDecoy,
         Mushroom,
@@ -370,7 +370,8 @@ namespace common.resources
         Sigil,
         NoDamageAbility,
         BurningLightning,
-        FFragments
+        FFragments,
+        Omnipotent
     }
 
     public class ActivateEffect
@@ -431,7 +432,7 @@ namespace common.resources
             if (elem.Attribute("duration") != null)
             {
                 DurationSec = float.Parse(elem.Attribute("duration").Value);
-                DurationMS = (int) (DurationSec * 1000);
+                DurationMS = (int)(DurationSec * 1000);
             }
             if (elem.Attribute("duration2") != null)
                 DurationMS = (int)(float.Parse(elem.Attribute("duration2").Value) * 1000);
@@ -546,7 +547,7 @@ namespace common.resources
             if (elem.Element("NexusPortal") != null)
                 NexusPortal = true;
 
-            Timeout = (n = elem.Element("Timeout")) != null ? 
+            Timeout = (n = elem.Element("Timeout")) != null ?
                 int.Parse(n.Value) : 30;
 
             Locked = elem.Element("LockedPortal") != null;
@@ -672,7 +673,7 @@ namespace common.resources
         public float RateOfFire { get; private set; }
         public bool Usable { get; private set; }
         public bool Radiant { get; private set; }
-        
+
         public bool Mythical { get; private set; }
         public bool LG { get; private set; }
         public bool MY { get; private set; }
@@ -1067,7 +1068,7 @@ namespace common.resources
                 if (ae.SkinType != 0)
                     skinType = ae.SkinType;
             }
-                
+
             var setpiece = new List<Setpiece>();
             foreach (XElement i in setElem.Elements("Setpiece"))
                 setpiece.Add(new Setpiece(i));
@@ -1109,7 +1110,7 @@ namespace common.resources
             sd.Expires = skinElem.Element("Expires") != null;
             sd.UnlockSpecial = skinElem.Element("UnlockSpecial") != null;
             sd.NoSkinSelect = skinElem.Element("NoSkinSelect") != null;
-            sd.PlayerExclusive = skinElem.Element("PlayerExclusive") == null ? 
+            sd.PlayerExclusive = skinElem.Element("PlayerExclusive") == null ?
                 null : skinElem.Element("PlayerExclusive").Value;
 
             var ul = skinElem.Element("UnlockLevel");
@@ -1150,11 +1151,11 @@ namespace common.resources
                 n.Attribute("type") != null &&
                 n.Attribute("level") != null)
             {
-                Type = (ushort) Utils.FromString(n.Attribute("type").Value);
-                Level = (ushort) Utils.FromString(n.Attribute("level").Value);
+                Type = (ushort)Utils.FromString(n.Attribute("type").Value);
+                Level = (ushort)Utils.FromString(n.Attribute("level").Value);
             }
             if ((n = elem.Element("UnlockCost")) != null)
-                Cost = (uint) Utils.FromString(n.Value);
+                Cost = (uint)Utils.FromString(n.Value);
         }
     }
     public class Stat
@@ -1175,7 +1176,7 @@ namespace common.resources
                 StartingValue = int.Parse(x.Value);
                 MaxValue = int.Parse(x.Attribute("max").Value);
             }
-            
+
             var y = elem.Elements("LevelIncrease");
             foreach (var s in y)
                 if (s.Value == Type)
@@ -1201,7 +1202,8 @@ namespace common.resources
                 case 10: return "Luck";
                 case 11: return "CriticalDmg";
                 case 12: return "CriticalHit";
-            } return null;
+            }
+            return null;
         }
     }
     public class PlayerDesc : ObjectDesc
@@ -1315,11 +1317,11 @@ namespace common.resources
             }
             else
             {
-                MinSize = (n = elem.Element("MinSize")) != null ? 
+                MinSize = (n = elem.Element("MinSize")) != null ?
                     Utils.FromString(n.Value) : 100;
-                MaxSize = (n = elem.Element("MaxSize")) != null ? 
+                MaxSize = (n = elem.Element("MaxSize")) != null ?
                     Utils.FromString(n.Value) : 100;
-                SizeStep = (n = elem.Element("SizeStep")) != null ? 
+                SizeStep = (n = elem.Element("SizeStep")) != null ?
                     Utils.FromString(n.Value) : 0;
             }
 
@@ -1362,7 +1364,7 @@ namespace common.resources
 
             Oryx = elem.Element("Oryx") != null;
             Hero = elem.Element("Hero") != null;
-            
+
             if ((n = elem.Element("PerRealmMax")) != null)
                 PerRealmMax = Utils.FromString(n.Value);
             else

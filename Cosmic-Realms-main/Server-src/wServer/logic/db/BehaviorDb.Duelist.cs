@@ -10,7 +10,8 @@ namespace wServer.logic
         private _ Duelist = () => Behav()
             .Init("Zemith The Assassin",
                 new State(
-                    new ScaleHP2(50, 1, 15),
+                    new DropPortalOnDeath("Duelist Portal", 100),
+                      new ScaleHP2(50, 2, 15),
                     new State("Start",
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                     new PlayerWithinTransition(9, "2")
@@ -132,7 +133,9 @@ namespace wServer.logic
                     new ItemLoot("Greater Potion of Critical Chance", 1),
                     new ItemLoot("Greater Potion of Critical Damage", 0.1),
                     new ItemLoot("Greater Potion of Critical Chance", 0.1),
-                    new ItemLoot("Omnipotent Token x1", 0.075),
+                    new ItemLoot("Omnipotent Token x1", 1),
+                    new ItemLoot("Omnipotent Token x1", 1),
+                    new ItemLoot("Omnipotent Token x1", 1),
                     new ItemLoot("Everlasting Inferno", 0.002),
                     new ItemLoot("Conflict's Elimination", 0.002),
                     new ItemLoot("Revolting Flame Amulet", 0.002),
@@ -146,7 +149,8 @@ namespace wServer.logic
 
           .Init("Vargo the Supreme Mage",
                 new State(
-                    new ScaleHP2(100, 1, 15),
+
+                      new ScaleHP2(30, 2, 15),
                     new State("Start",
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                     new PlayerWithinTransition(9, "2")
@@ -251,6 +255,9 @@ namespace wServer.logic
                     new ItemLoot("Greater Potion of Critical Damage", 0.1),
                     new ItemLoot("Greater Potion of Critical Chance", 0.1),
                     new ItemLoot("Omnipotent Token x1", 0.075),
+                    new ItemLoot("Omnipotent Token x1", 1),
+                    new ItemLoot("Omnipotent Token x1", 1),
+                    new ItemLoot("Omnipotent Token x1", 1),
                     new ItemLoot("Fractal Nova", 0.002),
                     new ItemLoot("Heretical Garments", 0.002),
                     new ItemLoot("Infragilis", 0.002),
@@ -354,7 +361,8 @@ namespace wServer.logic
 
           .Init("Mage of the Crownguard",
                 new State(
-                    new ScaleHP2(100, 1, 15),
+                    new DropPortalOnDeath("Master Zemith's Hideout Portal", 100),
+                    new ScaleHP2(41, 1, 15),
                     new State("Start",
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                     new PlayerWithinTransition(9, "2")
@@ -493,6 +501,9 @@ namespace wServer.logic
                     new ItemLoot("Greater Potion of Critical Damage", 0.1),
                     new ItemLoot("Greater Potion of Critical Chance", 0.1),
                     new ItemLoot("Omnipotent Token x1", 0.075),
+                    new ItemLoot("Omnipotent Token x1", 1),
+                    new ItemLoot("Omnipotent Token x1", 1),
+                    new ItemLoot("Omnipotent Token x1", 1),
                     new ItemLoot("The Book of Balance", 0.002),
                     new ItemLoot("Infinite Knowledge", 0.002),
                     new TierLoot(tier: 7, type: ItemType.Ability, probability: 0.10),
@@ -578,8 +589,8 @@ namespace wServer.logic
             )
           .Init("Guardian of the Crownguard",
                 new State(
-                    new TransformOnDeath("Blades of Enchantment", 1, 1, 0.25f),
-                    new ScaleHP2(90, 2, 15),
+                    new TransformOnDeath("Blades of Enchantment", 1, 1, 0.75f),
+                    new ScaleHP2(30, 2, 15),
                     new State("Start2",
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                     new PlayerWithinTransition(9, "2")
@@ -634,8 +645,10 @@ namespace wServer.logic
                     new ItemLoot("Greater Potion of Critical Chance", 0.5),
                     new ItemLoot("Greater Potion of Critical Damage", 0.1),
                     new ItemLoot("Greater Potion of Critical Chance", 0.1),
-
+                    new ItemLoot("Omnipotent Token x1", 1),
                     new ItemLoot("Omnipotent Token x1", 0.075),
+                    new ItemLoot("Omnipotent Token x1", 1),
+                    new ItemLoot("Omnipotent Token x1", 1),
                     new ItemLoot("Knight's Vow Shield", 0.002),
                     new ItemLoot("Knight's Vow Armor", 0.002),
                     new TierLoot(tier: 7, type: ItemType.Ability, probability: 0.10),
@@ -1132,6 +1145,8 @@ namespace wServer.logic
                   new ItemLoot("Greater Potion of Critical Damage", 0.1),
                   new ItemLoot("Greater Potion of Critical Chance", 0.1),
                   new ItemLoot("Critical Damage", 0.50),
+
+                  new ItemLoot("Omnipotent Token x5", 0.05),
                   new ItemLoot("Critical Chance", 0.50),//Star in a Bottle
                   new ItemLoot("Star in a Bottle", 0.006),
                   new ItemLoot("Omnipotent Token x1", 0.002)

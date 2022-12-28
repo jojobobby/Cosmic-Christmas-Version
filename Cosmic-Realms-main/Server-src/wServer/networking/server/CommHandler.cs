@@ -55,14 +55,14 @@ namespace wServer.networking.server
         private readonly SocketAsyncEventArgs _send;
         private readonly SocketAsyncEventArgs _receive;
         private ConcurrentQueue<Packet>[] _pendings;
-        
+
         private int _recieveCount = 0;
         private Timer _rWatch;
         private bool _startCount = false;
 
         public CommHandler(
             Client client,
-            SocketAsyncEventArgs send, 
+            SocketAsyncEventArgs send,
             SocketAsyncEventArgs receive)
         {
             _rWatch = new Timer(1000);
@@ -83,7 +83,7 @@ namespace wServer.networking.server
                 _pendings[i] = new ConcurrentQueue<Packet>();
         }
 
-        const int MAX_PACKET_PER_SECOND = 2000;
+        const int MAX_PACKET_PER_SECOND = 1000;
         Player player;
         private void resetCount(object source, ElapsedEventArgs e)
         {
@@ -122,9 +122,9 @@ namespace wServer.networking.server
             _startCount = false;
             _recieveCount = 0;
 
-            ((SendToken) _send.UserToken).Reset();
-            ((ReceiveToken) _receive.UserToken).Reset();
-            
+            ((SendToken)_send.UserToken).Reset();
+            ((ReceiveToken)_receive.UserToken).Reset();
+
             _pendings = new ConcurrentQueue<Packet>[3];
             for (var i = 0; i < 3; i++)
                 _pendings[i] = new ConcurrentQueue<Packet>();
@@ -153,7 +153,7 @@ namespace wServer.networking.server
             try
             {
                 willRaiseEvent = e.AcceptSocket.ReceiveAsync(e);
-                
+
             }
             catch (Exception exception)
             {
@@ -190,7 +190,7 @@ namespace wServer.networking.server
                 _client.Disconnect(msg);
                 return;
             }
-            
+
             var bytesNotRead = e.BytesTransferred;
 
             // Client has finished sending data?
@@ -199,7 +199,7 @@ namespace wServer.networking.server
                 _client.Disconnect();
                 return;
             }
-            
+
             _recieveCount++;
 
             while (bytesNotRead > 0)
@@ -231,20 +231,20 @@ namespace wServer.networking.server
                 }
 
                 if (r.BytesRead == r.PacketLength)
-                {                    
+                {
                     if (_client.IsReady())
                     {
                         var packetId = r.GetPacketId(); // PacketId
                         var packetBody = r.GetPacketBody(); // byte[]
-                        
+
                         /*#if DEBUG
                         Console.WriteLine($"Incoming packet detected!\nID: {packetId}, Size: {packetBody.Length} bytes");
                         #endif DEBUG*/
-                        
+
                         _client.Manager.Network
                             .AddPendingPacket(_client, packetId, packetBody);
                     }
-                    
+
                     r.Reset();
                 }
             }
@@ -276,7 +276,7 @@ namespace wServer.networking.server
             if (_client.State == ProtocolState.Disconnected)
                 return;
 
-            var s = (SendToken) e.UserToken;
+            var s = (SendToken)e.UserToken;
 
             if (msDelay > 0)
                 await Task.Delay(msDelay);
@@ -287,9 +287,9 @@ namespace wServer.networking.server
                 FlushPending(s);
             }
 
-            int bytesToSend = s.BytesAvailable > _bufferSize ? 
+            int bytesToSend = s.BytesAvailable > _bufferSize ?
                 _bufferSize : s.BytesAvailable;
-            
+
             e.SetBuffer(s.BufferOffset, bytesToSend);
             Buffer.BlockCopy(s.Data, s.BytesSent,
                 e.Buffer, s.BufferOffset, bytesToSend);
@@ -318,7 +318,7 @@ namespace wServer.networking.server
                 s.Reset();
                 return;
             }
-            
+
             if (e.SocketError != SocketError.Success)
             {
                 _client.Disconnect("Send SocketError = " + e.SocketError);
@@ -331,7 +331,7 @@ namespace wServer.networking.server
             var delay = 0;
             if (s.BytesAvailable <= 0)
                 delay = _client.Manager.Logic.MsPT;
-            
+
             StartSend(e, delay);
         }
 
@@ -340,7 +340,7 @@ namespace wServer.networking.server
             //if (priority == PacketPriority.Low && _client.IsLagging)
             //    return;
 
-            _pendings[(int) priority].Enqueue(pkt);
+            _pendings[(int)priority].Enqueue(pkt);
         }
 
         public void SendPackets(IEnumerable<Packet> pkts, PacketPriority priority)
@@ -349,7 +349,7 @@ namespace wServer.networking.server
             //    return;
 
             foreach (var i in pkts)
-                _pendings[(int) priority].Enqueue(i);
+                _pendings[(int)priority].Enqueue(i);
         }
 
         private bool FlushPending(SendToken s)
@@ -369,9 +369,9 @@ namespace wServer.networking.server
                     s.BytesAvailable += bytesWritten;
                 }
 
-            if (s.BytesAvailable <= 0) 
+            if (s.BytesAvailable <= 0)
                 return false;
-                
+
             return true;
         }
 
@@ -402,7 +402,7 @@ namespace wServer.networking.server
             for (var i = 0; i < 3; i++)
                 if (_pendings[i].OfType<NewTick>().Any())
                     return true;
-            
+
             return false;
         }
     }
